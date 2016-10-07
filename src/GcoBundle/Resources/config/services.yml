@@ -1,0 +1,4 @@
+services:
+    gco.user.controller:
+        class: 'GcoBundle\Controller\UserController'
+        arguments:

@@ -1,3 +1,7 @@
+gco:
+    resource: "@GcoBundle/Resources/config/routing.yml"
+    prefix:   /gco/
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
