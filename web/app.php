@@ -1,12 +1,26 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Debug\Debug;
+
+$env = 'prod';
+if (in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']) || (strpos(@$_SERVER['HTTP_HOST'], 'dev') !== false)) {
+    $env = 'dev';
+}
+
+// If you don't want to setup permissions the proper way, just uncomment the following PHP line
+// read http://symfony.com/doc/current/book/installation.html#checking-symfony-application-configuration-and-setup
+// for more information
+//umask(0000);
 
 /** @var \Composer\Autoload\ClassLoader $loader */
 $loader = require __DIR__.'/../app/autoload.php';
 include_once __DIR__.'/../var/bootstrap.php.cache';
+if ('dev' == $env) {
+    Debug::enable();
+}
 
-$kernel = new AppKernel('prod', false);
+$kernel = new AppKernel($env, false);
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);
 
