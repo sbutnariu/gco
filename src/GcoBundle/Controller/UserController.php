@@ -2,14 +2,22 @@
 
 namespace GcoBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use GcoBundle\DataFixture\UserDataFixture;
 
-class UserController extends Controller
+class UserController
 {
+    private $dataFixture;
+    public function __construct(UserDataFixture $dataFixture)
+    {
+        $this->dataFixture = $dataFixture;
+    }
+
     public function getUserAction(Request $request, $id)
     {
+        $user = $this->dataFixture->getUser($id);
+        var_dump($user);
         return new Response($id, 200);
     }
 }

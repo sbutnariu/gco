@@ -2,3 +2,13 @@ services:
     gco.user.controller:
         class: 'GcoBundle\Controller\UserController'
         arguments:
+          - '@gco.user.df'
+#          - @gco.user.service
+#    gco.user.service:
+#        class: 'GcoBundle\Service\UserService'
+#        arguments:
+#          - gco.user.orm
+    gco.user.df:
+        class: 'GcoBundle\DataFixture\UserDataFixture'
+        arguments:
+          - '@doctrine'
