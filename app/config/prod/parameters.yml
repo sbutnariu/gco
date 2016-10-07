@@ -1,0 +1,12 @@
+parameters:
+    database_host: localhost
+    database_port: null
+    database_name: gco
+    database_user: gco
+    database_password: gco
+    mailer_transport: smtp
+    mailer_host: localhost
+    mailer_user: null
+    mailer_password: null
+    secret: ThisTokenIsNotSoSecretChangeIt
+
