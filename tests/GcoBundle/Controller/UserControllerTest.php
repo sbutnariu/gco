@@ -23,6 +23,6 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
         $request = new Request(array(), array(), array(), array(), array(), array(), json_encode(array()));
 
         $actualResponse = $ctrl->getUserAction($request, 1);
-        $this->assertEquals(201, $actualResponse->getStatusCode());
+        $this->assertEquals(200, $actualResponse->getStatusCode());
     }
 }
