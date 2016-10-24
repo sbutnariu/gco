@@ -3,6 +3,7 @@ services:
         class: 'GcoBundle\Controller\UserController'
         arguments:
           - '@gco.user.df'
+          - '@serializer'
 #          - @gco.user.service
 #    gco.user.service:
 #        class: 'GcoBundle\Service\UserService'
