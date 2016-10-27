@@ -1,0 +1,26 @@
+GcoBundle\Entity\TechValidator:
+    type: entity
+    table: tech_validator
+    id:
+        userId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: user_id
+        technologyId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: technology_id
+    fields:
+        agencyId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: agency_id
+    lifecycleCallbacks: {  }

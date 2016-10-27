@@ -3,27 +3,37 @@
 namespace GcoBundle\Entity;
 
 /**
- * Levels
+ * Level
  */
-class Levels
+class Level
 {
-    /**
-     * @var string
-     */
-    private $name;
-
     /**
      * @var integer
      */
     private $id;
 
+    /**
+     * @var string
+     */
+    private $name;
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set name
      *
      * @param string $name
      *
-     * @return Levels
+     * @return Level
      */
     public function setName($name)
     {
@@ -40,16 +50,6 @@ class Levels
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }
 

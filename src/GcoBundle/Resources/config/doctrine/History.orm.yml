@@ -1,0 +1,35 @@
+GcoBundle\Entity\History:
+    type: entity
+    table: history
+    id:
+        userId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: user_id
+        techId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: tech_id
+    fields:
+        levelId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: level_id
+        date:
+            type: date
+            nullable: false
+        statusId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: status_id
+    lifecycleCallbacks: {  }

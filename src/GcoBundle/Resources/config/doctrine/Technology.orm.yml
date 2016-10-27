@@ -1,0 +1,26 @@
+GcoBundle\Entity\Technology:
+    type: entity
+    table: technology
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        coreId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: core_id
+        technology:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }
