@@ -2,3 +2,8 @@ gco_get_user:
     path: /user/{id}
     defaults: {_controller: 'gco.user.controller:getUserAction'}
     methods: [GET]
+    
+gco_core_technology:
+    path: /technology/core
+    defaults: {_controller: 'gco.core_technology.controller:addCoreTechnologyAction'}
+    methods: [POST]
