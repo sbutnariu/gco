@@ -17,7 +17,7 @@ class UserDataFixture
     public function getUser($id)
     {
         $user = $this->doctrine
-            ->getRepository('GcoBundle:Users')
+            ->getRepository('GcoBundle:User')
             ->find($id);
 
         return $user;

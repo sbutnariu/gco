@@ -1,0 +1,26 @@
+GcoBundle\Entity\UserSkill:
+    type: entity
+    table: user_skill
+    id:
+        userId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: user_id
+        technologyId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: technology_id
+    fields:
+        levelId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: level_id
+    lifecycleCallbacks: {  }

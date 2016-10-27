@@ -3,10 +3,15 @@
 namespace GcoBundle\Entity;
 
 /**
- * Users
+ * User
  */
-class Users
+class User
 {
+    /**
+     * @var integer
+     */
+    private $id;
+
     /**
      * @var string
      */
@@ -27,18 +32,23 @@ class Users
      */
     private $roleId;
 
-    /**
-     * @var integer
-     */
-    private $id;
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set username
      *
      * @param string $username
      *
-     * @return Users
+     * @return User
      */
     public function setUsername($username)
     {
@@ -62,7 +72,7 @@ class Users
      *
      * @param string $email
      *
-     * @return Users
+     * @return User
      */
     public function setEmail($email)
     {
@@ -86,7 +96,7 @@ class Users
      *
      * @param string $agency
      *
-     * @return Users
+     * @return User
      */
     public function setAgency($agency)
     {
@@ -110,7 +120,7 @@ class Users
      *
      * @param integer $roleId
      *
-     * @return Users
+     * @return User
      */
     public function setRoleId($roleId)
     {
@@ -127,16 +137,6 @@ class Users
     public function getRoleId()
     {
         return $this->roleId;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }
 

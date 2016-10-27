@@ -3,27 +3,37 @@
 namespace GcoBundle\Entity;
 
 /**
- * Roles
+ * Role
  */
-class Roles
+class Role
 {
-    /**
-     * @var string
-     */
-    private $role;
-
     /**
      * @var integer
      */
     private $id;
 
+    /**
+     * @var string
+     */
+    private $role;
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set role
      *
      * @param string $role
      *
-     * @return Roles
+     * @return Role
      */
     public function setRole($role)
     {
@@ -40,16 +50,6 @@ class Roles
     public function getRole()
     {
         return $this->role;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }
 
