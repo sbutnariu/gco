@@ -21,8 +21,8 @@ class CoreTechnologyController  extends Controller{
         $request = Request::createFromGlobals();
         $request->getPathInfo();
 
-
-        $this->dataFixture->setCoreTechnology($request->request->get('name'));
+echo $request->request->get('name');
+        $this->dataFixture->setCoreTechnology($request->request->get('name')); // inlocuit cu serviciul (remove datafixture from controller)
         
         return new Response('controller', 200);
     }

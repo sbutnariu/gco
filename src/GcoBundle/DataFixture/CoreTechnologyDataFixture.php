@@ -5,7 +5,7 @@ namespace GcoBundle\DataFixture;
 
 use Symfony\Bridge\Doctrine;
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use GcoBundle\Entity\CoreTechnologies;
+use GcoBundle\Entity\CoreTechnology;
 
 
 class CoreTechnologyDataFixture{
@@ -19,9 +19,9 @@ class CoreTechnologyDataFixture{
 
     public function setCoreTechnology($technologyName)
     {       
-        $coreTechnology = new CoreTechnologies();
+        $coreTechnology = new CoreTechnology();
         $coreTechnology->setTechnology($technologyName);       
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->doctrine->getManager();
 
         // tells Doctrine you want to (eventually) save the Product (no queries yet)
         $em->persist($coreTechnology);
