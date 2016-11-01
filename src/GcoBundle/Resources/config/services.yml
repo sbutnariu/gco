@@ -17,12 +17,12 @@ services:
     gco.core_technology.controller:
         class: 'GcoBundle\Controller\CoreTechnologyController'
         arguments:
-            - '@gco.core_technology.data_fixture'
+            - '@gco.core_technology.service'
             
-    #gco.core_technology.service:
-    #    class: 'GcoBundle\Service\CoreTechnologyService'
-    #    arguments:
-    #        - '@gco.core_technology.data_fixture'
+    gco.core_technology.service:
+        class: 'GcoBundle\Service\CoreTechnologyService'
+        arguments:
+            - '@gco.core_technology.data_fixture'
             
     gco.core_technology.data_fixture:
         class: 'GcoBundle\DataFixture\CoreTechnologyDataFixture'
