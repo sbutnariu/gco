@@ -1,6 +1,8 @@
 <?php
 
 namespace GcoBundle\Service;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 use GcoBundle\DataFixture\CoreTechnologyDataFixture;
 
@@ -20,6 +22,14 @@ class CoreTechnologyService {
     
     public function setCoreTechnology($coreTechnologyName)
     {
-        $this->dataFixture->setCoreTechnology($coreTechnologyName);
+        $isDuplicateTechnology = $this->dataFixture->checkDuplicateCoreTechnology($coreTechnologyName);
+        if (!$isDuplicateTechnology){
+            $this->dataFixture->setCoreTechnology($coreTechnologyName);
+        }
+        else{
+            return new Response("duplicate technology", 200);
+        }
+      
     }
+
 }

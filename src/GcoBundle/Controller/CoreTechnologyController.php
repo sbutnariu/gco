@@ -17,16 +17,21 @@ class CoreTechnologyController  extends Controller{
 
 
     public function addCoreTechnologyAction()
-    { 
+    {         
         $request = Request::createFromGlobals();
         $request->getPathInfo();
         $coreTechnologyName = $request->request->get('name');
-        if(!empty ($coreTechnologyName)){
-            $this->coreTechnologyService->setCoreTechnology($coreTechnologyName); // inlocuit cu serviciul (remove datafixture from controller)
+        $this->validateRequest($coreTechnologyName);
+        if(!empty($coreTechnologyName)){
+            $this->coreTechnologyService->setCoreTechnology($coreTechnologyName);
+             return new Response('Core technology "'.$coreTechnologyName.'" inserted ', 200);
         }
         else{
-           return new Response('Technology Name', 400); 
+           return new Response('Technology name empty', 400); 
         }
-        return new Response('controller', 200);
+       
+    }
+    public function validateRequest(){
+        
     }
 }

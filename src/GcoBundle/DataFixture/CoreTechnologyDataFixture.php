@@ -22,14 +22,27 @@ class CoreTechnologyDataFixture{
         $coreTechnology = new CoreTechnology();
         $coreTechnology->setTechnology($technologyName);       
         $em = $this->doctrine->getManager();
-
-        // tells Doctrine you want to (eventually) save the Product (no queries yet)
         $em->persist($coreTechnology);
-
-        // actually executes the queries (i.e. the INSERT query)
         $em->flush();
 
        // return new Response('Saved new technology with id '.$coreTechnology->getId());
+        
+    }
+    public function checkDuplicateCoreTechnology($technologyName){
+        $isDuplicate = false;
+        $em = $this->doctrine->getManager();
+        $connection = $em->getConnection();
+        $statement = $connection->prepare("SELECT * FROM core_technology WHERE technology = :technology");
+        
+        $statement->bindValue('technology', $technologyName);
+        
+        $statement->execute();
+        $results = $statement->fetchAll();
+        if(!empty($results)){
+            $isDuplicate = true;
+        }
+        
+        return $isDuplicate;
         
     }
 }
