@@ -13,3 +13,9 @@ services:
         class: 'GcoBundle\DataFixture\UserDataFixture'
         arguments:
           - '@doctrine'
+
+    gco.technology.controller:
+        class: 'GeoBundle\Controller\TechnologyController'
+        arguments:
+          - '@gco.technology.df'
+          - '@serializer'
