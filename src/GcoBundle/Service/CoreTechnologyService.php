@@ -3,6 +3,8 @@
 namespace GcoBundle\Service;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Console\Exception\RuntimeException;
+
 
 use GcoBundle\DataFixture\CoreTechnologyDataFixture;
 
@@ -25,7 +27,8 @@ class CoreTechnologyService {
         $isDuplicateTechnology = $this->dataFixture->checkDuplicateCoreTechnology($coreTechnologyName);
         
         if ($isDuplicateTechnology){
-            throw new RuntimeException('Core technology '.$coreTechnologyName.'already exists');          
+
+            throw new RuntimeException('Core technology '.$coreTechnologyName.' already exists');          
         }
             
         $this->dataFixture->setCoreTechnology($coreTechnologyName);

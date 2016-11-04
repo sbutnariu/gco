@@ -31,7 +31,7 @@ class CoreTechnologyController  extends Controller{
         return new Response('Core technology "'.$coreTechnologyName.'" inserted ', 200);
        
     }
-    public function validateRequest(){
+    public function validateRequest($coreTechnologyName){
         $result = false;
         
         if(!empty($coreTechnologyName)){
