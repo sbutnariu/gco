@@ -20,16 +20,16 @@ class CoreTechnologyService {
         return new Response("service", 200);
     }
     
-    public function setCoreTechnology($coreTechnologyName)
+    public function addCoreTechnology($coreTechnologyName)
     {
         $isDuplicateTechnology = $this->dataFixture->checkDuplicateCoreTechnology($coreTechnologyName);
-        if (!$isDuplicateTechnology){
-            $this->dataFixture->setCoreTechnology($coreTechnologyName);
+        
+        if ($isDuplicateTechnology){
+            throw new RuntimeException('Core technology '.$coreTechnologyName.'already exists');          
         }
-        else{
-            return new Response("duplicate technology", 200);
-        }
-      
+            
+        $this->dataFixture->setCoreTechnology($coreTechnologyName);
+           
     }
 
 }

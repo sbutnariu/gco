@@ -9,18 +9,31 @@ class CoreTechnologyControllerTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetCoreTechnologyAction()
     {
+        $coreTechnologyName = 'php';
+        
         $fixtureMock = $this->getMockBuilder('GcoBundle\DataFixture\CoreTechnologyDataFixture')
             ->disableOriginalConstructor()
             ->getMock();
-        $serializerMock = $this->getMockBuilder('Symfony\Component\Serializer\SerializerInterface')
+        
+        $fixtureMock->expects($coreTechnologyName)
+            ->method('checkDuplicateCoreTechnology')
+            ->will($this->returnValue(TRUE));
+        
+        
+        
+        $serviceMock = $this->getMockBuilder('GcoBundle\DataFixture\CoreTechnologyService')
             ->disableOriginalConstructor()
             ->getMock();
-        $serializerMock->expects($this->any())
-            ->method('serialize')
-            ->will($this->returnValue(json_encode(array())));
-        $ctrl = new CoreTechnologyController($fixtureMock, $serializerMock);
+        
+        $serviceMock->expects($coreTechnologyName)
+            ->method('checkDuplicateCoreTechnology')
+            ->will($this->returnValue(TRUE));
+        
+        
+        
+        $ctrl = new CoreTechnologyController($fixtureMock);
 
-        $request = new Request(array(), array(), array(), array(), array(), array(), json_encode(array()));
+        $request = new Request($coreTechnologyName, json_encode(array()));
 
         $actualResponse = $ctrl->getCoreTechnologyAction($request, 1);
         $this->assertEquals(200, $actualResponse->getStatusCode());
