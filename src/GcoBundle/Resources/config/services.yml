@@ -13,3 +13,19 @@ services:
         class: 'GcoBundle\DataFixture\UserDataFixture'
         arguments:
           - '@doctrine'
+    gco.list.technology:
+            class: 'GcoBundle\DataFixture\TechnologyDataFixture'
+            arguments:
+              - '@doctrine'
+    gco.technology.controller:
+        class: 'GcoBundle\Controller\TechnologyController'
+        arguments:
+          - '@gco.technology.service'
+          - '@serializer'
+    gco.validator:
+        class: 'GcoBundle\Validator\Validator'
+    gco.technology.service:
+        class: 'GcoBundle\Service\TechService'
+        arguments:
+          - '@gco.validator'
+          - '@gco.list.technology'

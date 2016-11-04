@@ -2,3 +2,8 @@ gco_get_user:
     path: /user/{id}
     defaults: {_controller: 'gco.user.controller:getUserAction'}
     methods: [GET]
+
+gco_get_list_technologies:
+    path: /list/{technology}
+    defaults: {_controller: 'gco.technology.controller:getListTechnologiesAction'}
+    methods: [GET]
