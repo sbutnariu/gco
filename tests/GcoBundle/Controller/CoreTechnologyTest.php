@@ -11,11 +11,9 @@ class CoreTechnologyControllerTest extends \PHPUnit_Framework_TestCase
     {
         $coreTechnologyName = 'php';
         
-        $fixtureMock = $this->getMockBuilder('GcoBundle\DataFixture\CoreTechnologyDataFixture')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $fixtureMock = $this->getMockBuilder('GcoBundle\DataFixture\CoreTechnologyDataFixture')->disableOriginalConstructor()->getMock();
         
-        $fixtureMock->expects($coreTechnologyName)
+        $fixtureMock->expects($this->any())
             ->method('checkDuplicateCoreTechnology')
             ->will($this->returnValue(TRUE));
         
@@ -25,13 +23,13 @@ class CoreTechnologyControllerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
         
-        $serviceMock->expects($coreTechnologyName)
+        $serviceMock->expects($this->any())
             ->method('checkDuplicateCoreTechnology')
             ->will($this->returnValue(TRUE));
         
         
         
-        $ctrl = new CoreTechnologyController($fixtureMock);
+        $ctrl = new CoreTechnologyController($serviceMock);
 
         $request = new Request($coreTechnologyName, json_encode(array()));
 

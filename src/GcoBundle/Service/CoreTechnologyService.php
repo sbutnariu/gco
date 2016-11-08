@@ -7,6 +7,7 @@ use Symfony\Component\Console\Exception\RuntimeException;
 
 
 use GcoBundle\DataFixture\CoreTechnologyDataFixture;
+use GcoBundle\Exception\CoreTechnologyAlreadyExistsException;
 
 class CoreTechnologyService {
     
@@ -27,10 +28,9 @@ class CoreTechnologyService {
         $isDuplicateTechnology = $this->dataFixture->checkDuplicateCoreTechnology($coreTechnologyName);
         
         if ($isDuplicateTechnology){
-
-            throw new RuntimeException('Core technology '.$coreTechnologyName.' already exists');          
+            throw new CoreTechnologyAlreadyExistsException('Core technology '.$coreTechnologyName.' already exists');
         }
-            
+        
         $this->dataFixture->setCoreTechnology($coreTechnologyName);
            
     }
