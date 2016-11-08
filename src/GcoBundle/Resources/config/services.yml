@@ -2,13 +2,12 @@ services:
     gco.user.controller:
         class: 'GcoBundle\Controller\UserController'
         arguments:
-          - '@gco.user.df'
+          - '@gco.user.service'
           - '@serializer'
-#          - @gco.user.service
-#    gco.user.service:
-#        class: 'GcoBundle\Service\UserService'
-#        arguments:
-#          - gco.user.orm
+    gco.user.service:
+        class: 'GcoBundle\Service\UserService'
+        arguments:
+          - gco.user.df
     gco.user.df:
         class: 'GcoBundle\DataFixture\UserDataFixture'
         arguments:
@@ -17,5 +16,22 @@ services:
     gco.technology.controller:
         class: 'GeoBundle\Controller\TechnologyController'
         arguments:
-          - '@gco.technology.df'
+          - '@gco.technology.service'
           - '@serializer'
+    gco.technology.service:
+            class: 'GcoBundle\Service\TechnologyService'
+            arguments:
+              - @gco.technology.df
+              - @validator
+    gco.technology.df:
+        class: 'GeoBundle\Controller\TechnologyDataFixture'
+        arguments:
+          - '@doctrine'
+
+    gco.validators.validCoreTechnology:
+            class: Ilius\ApiServices\ProfileBundle\Validators\Constraints\NicknameForbiddenWordsValidator
+            arguments:
+                - '@ilius.tracking.marketing_info.cache'
+                - '@ilius.profile.dao.repository'
+            tags:
+                - { name: validator.constraint_validator, alias: ilius_nickname_forbidden_words }

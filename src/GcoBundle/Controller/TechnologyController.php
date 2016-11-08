@@ -6,22 +6,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use GcoBundle\DataFixture\TechnologyDataFixture;
+use GcoBundle\Service\TechnologyService;
 
 class TechnologyController
 {
-    private $dataFixture;
+    private $service;
     private $serializer;
 
-    public function __construct(TechnologyDataFixture $dataFixture, SerializerInterface $serializer)
+    public function __construct(TechnologyService $service, SerializerInterface $serializer)
     {
-        $this->dataFixture = $dataFixture;
+        $this->service = $service;
         $this->serializer = $serializer;
     }
 
     public function getTechnologyAction(Request $request, $id)
     {
-        $technology = $this->dataFixture->getTechnology($id);
+        $technology = $this->service->getTechnology($id);
         $jsonContent = $this->serializer->serialize($technology, JsonEncoder::FORMAT);
 
         return new Response($jsonContent, 200);
@@ -29,11 +29,12 @@ class TechnologyController
 
     public function addTechnologyAction(Request $request)
     {
-        $coreTechnologyId = $request->get("core_id");
-        $technologyName = $request->get("technology_name");
-        $technology = $this->dataFixture->addTechnology($coreTechnologyId, $technologyName);
+        $newTechnology = array(
+            'coreTechnologyId' => $request->get("core_id"),
+            'technologyName' => $request->get("technology_name")
+        );
+        $technology = $this->service->addTechnology($newTechnology);
         $jsonContent = $this->serializer->serialize($technology, JsonEncoder::FORMAT);
-
-        return new Response($jsonContent, 200);
+        return new Response(null, Response::HTTP_CREATED, array("ETag"=>$jsonContent));
     }
 }

@@ -7,16 +7,28 @@ use Symfony\Bridge\Doctrine;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\DriverManager;
 
+/**
+ * Class TechnologyDataFixture
+ * @package GcoBundle\DataFixture
+ */
 class TechnologyDataFixture
 {
     private $doctrine;
 
+    /**
+     * TechnologyDataFixture constructor.
+     * @param Registry $doctrine
+     */
     public function __construct(Registry $doctrine)
     {
         $this->doctrine = $doctrine;
 
     }
 
+    /**
+     * @param $id
+     * @return null|Technology
+     */
     public function getTechnology($id)
     {
         $technology = $this->doctrine
@@ -26,12 +38,12 @@ class TechnologyDataFixture
         return $technology;
     }
 
-    public function addTechnology($coreTechnologyId, $technologyName)
+    /**
+     * @param Technology $technology
+     * @return Technology
+     */
+    public function addTechnology(Technology $technology)
     {
-        $technology = new Technology();
-        $technology->setCoreId($coreTechnologyId);
-        $technology->setTechnology($technologyName);
-
         $em = $this->doctrine->getManager();
         $em->persist($technology);
         $em->flush();
