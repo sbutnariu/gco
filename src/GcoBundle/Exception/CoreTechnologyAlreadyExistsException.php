@@ -1,8 +1,11 @@
 <?php
 
-use Symfony\Component\Config\Definition\Exception\Exception;
-
-
-class CoreTechnologyAlreadyExistsException extends Exception{
-    //put your code here
+class CoreTechnologyAlreadyExistsException extends \RuntimeException {
+//https://knpuniversity.com/screencast/symfony-rest2/api-exception-subscriber
+    private $code = Response::BAD_REQUEST;
+    
+    public function __construct($message){
+        parent::__construct($message);
+    }
+    
 }
