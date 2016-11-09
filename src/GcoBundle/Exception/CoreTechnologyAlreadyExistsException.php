@@ -1,8 +1,11 @@
 <?php
+namespace GcoBundle\Exception;
+
+use Symfony\Component\HttpFoundation\Response;
 
 class CoreTechnologyAlreadyExistsException extends \RuntimeException {
 //https://knpuniversity.com/screencast/symfony-rest2/api-exception-subscriber
-    private $code = Response::BAD_REQUEST;
+    protected $code = Response::HTTP_BAD_REQUEST;
     
     public function __construct($message){
         parent::__construct($message);

@@ -1,11 +1,9 @@
 <?php
 
 namespace GcoBundle\Service;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Console\Exception\RuntimeException;
-
-
 use GcoBundle\DataFixture\CoreTechnologyDataFixture;
 use GcoBundle\Exception\CoreTechnologyAlreadyExistsException;
 

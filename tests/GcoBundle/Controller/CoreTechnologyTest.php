@@ -19,8 +19,9 @@ class CoreTechnologyControllerTest extends \PHPUnit_Framework_TestCase
         
         
         
-        $serviceMock = $this->getMockBuilder('GcoBundle\DataFixture\CoreTechnologyService')
+        $serviceMock = $this->getMockBuilder('GcoBundle\Service\CoreTechnologyService')
             ->disableOriginalConstructor()
+            ->setMethods(array('checkDuplicateCoreTechnology'))
             ->getMock();
         
         $serviceMock->expects($this->any())
@@ -31,9 +32,9 @@ class CoreTechnologyControllerTest extends \PHPUnit_Framework_TestCase
         
         $ctrl = new CoreTechnologyController($serviceMock);
 
-        $request = new Request($coreTechnologyName, json_encode(array()));
+        $request = new Request(array(), array(), array(), array(), array(), array(), $coreTechnologyName);
 
-        $actualResponse = $ctrl->getCoreTechnologyAction($request, 1);
-        $this->assertEquals(200, $actualResponse->getStatusCode());
+        $actualResponse = $ctrl->addCoreTechnologyAction($request);
+        $this->assertEquals(400, $actualResponse->getStatusCode());
     }
 }
