@@ -1,6 +1,7 @@
 <?php
 
 namespace GcoBundle\Service;
+use GcoBundle\Entity\CoreTechnology;
 use GcoBundle\Entity\Technology;
 use GcoBundle\DataFixture\TechnologyDataFixture;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -10,7 +11,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  * Class TechnologyService
  * @package GcoBundle\Service
  */
-class TechnologyService
+class CoreTechnologyService
 {
     /**
      * @var TechnologyDataFixture
@@ -27,16 +28,11 @@ class TechnologyService
 
     /**
      * @param $id
-     * @return null|Technology
-     * @throws \NotFoundException|\WrongTypeException
+     * @return null|CoreTechnology
      */
     public function getTechnology($id)
     {
-        if(!is_int($id))
-            throw new \WrongTypeException();
-        $technology = $this->dataFixture->getTechnology($id);
-        if(is_null($technology))
-            throw new \NotFoundException();
+        $technology = new CoreTechnology();
         return $technology;
     }
 
@@ -46,17 +42,9 @@ class TechnologyService
      *
      * @param array $technology
      * @return Technology
-     * @throws \WrongTypeException
      */
     public function addTechnology(array $technology)
     {
-        if(
-            !is_array($technology)||
-            !isset($technology['coreTechnologyId'])||
-            !isset($technology['technologyName'])||
-            !is_int($technology['coreTechnologyId'])
-        )
-            throw new \WrongTypeException();
         $newTechnology = new Technology();
         $newTechnology->setCoreId($technology['coreTechnologyId']);
         $newTechnology->setTechnology($technology['technologyName']);

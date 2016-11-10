@@ -1,8 +1,6 @@
 GcoBundle\Entity\Technology:
   constraints:
-     - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
-        fields: [id]
-        em: ''
+     - GcoBundle\Validators\ExistsCoreTechnology
 
   properties:
     coreId:

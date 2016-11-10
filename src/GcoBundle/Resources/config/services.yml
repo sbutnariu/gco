@@ -29,9 +29,14 @@ services:
           - '@doctrine'
 
     gco.validators.validCoreTechnology:
-            class: Ilius\ApiServices\ProfileBundle\Validators\Constraints\NicknameForbiddenWordsValidator
+            class: GcoBundle\Validators\ExistsCoreTechnologyValidator
             arguments:
-                - '@ilius.tracking.marketing_info.cache'
-                - '@ilius.profile.dao.repository'
+                - '@gco.core_technology.service'
             tags:
-                - { name: validator.constraint_validator, alias: ilius_nickname_forbidden_words }
+                - { name: validator.constraint_validator, alias: gco_core_technology_exists }
+
+    gco.core_technology.service:
+            class: 'GcoBundle\Service\CoreTechnologyService'
+            arguments:
+              - @gco.technology.df
+              - @validator
