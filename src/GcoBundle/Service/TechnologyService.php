@@ -63,8 +63,7 @@ class TechnologyService
         $errors = $this->validator->validate($newTechnology);
         if (count($errors) > 0)
         {
-            $errorsString = (string) $errors;
-            throw new Exception($errorsString);
+            throw new \WrongTypeException();
         }
         return $this->dataFixture->addTechnology($newTechnology);
     }
