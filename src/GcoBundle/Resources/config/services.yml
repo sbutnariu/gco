@@ -14,7 +14,7 @@ services:
           - '@doctrine'
 
     gco.technology.controller:
-        class: 'GeoBundle\Controller\TechnologyController'
+        class: 'GcoBundle\Controller\TechnologyController'
         arguments:
           - '@gco.technology.service'
           - '@serializer'
@@ -24,7 +24,7 @@ services:
               - '@gco.technology.df'
               - '@validator'
     gco.technology.df:
-        class: 'GeoBundle\Controller\TechnologyDataFixture'
+        class: 'GcoBundle\Controller\TechnologyDataFixture'
         arguments:
           - '@doctrine'
 
