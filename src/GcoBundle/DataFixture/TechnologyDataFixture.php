@@ -13,6 +13,9 @@ use Doctrine\DBAL\DriverManager;
  */
 class TechnologyDataFixture
 {
+    /**
+     * @var Registry
+     */
     private $doctrine;
 
     /**

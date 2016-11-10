@@ -11,17 +11,38 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use GcoBundle\Service\TechnologyService;
 
+/**
+ * Class TechnologyController
+ * @package GcoBundle\Controller
+ */
 class TechnologyController
 {
+    /**
+     * @var TechnologyService
+     */
     private $service;
+    /**
+     * @var SerializerInterface
+     */
     private $serializer;
 
+    /**
+     * TechnologyController constructor.
+     * @param TechnologyService $service
+     * @param SerializerInterface $serializer
+     */
     public function __construct(TechnologyService $service, SerializerInterface $serializer)
     {
         $this->service = $service;
         $this->serializer = $serializer;
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return Response
+     * @throws BadRequestHttpException|NotFoundHttpException|ServiceUnavailableHttpException
+     */
     public function getTechnologyAction(Request $request, $id)
     {
         try
@@ -45,6 +66,11 @@ class TechnologyController
         return new Response($jsonContent, 200);
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws BadRequestHttpException|NotFoundHttpException|ServiceUnavailableHttpException
+     */
     public function addTechnologyAction(Request $request)
     {
         $newTechnology = array(

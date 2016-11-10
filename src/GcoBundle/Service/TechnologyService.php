@@ -17,8 +17,16 @@ class TechnologyService
      */
     private $dataFixture;
 
+    /**
+     * @var ValidatorInterface
+     */
     private $validator;
 
+    /**
+     * TechnologyService constructor.
+     * @param TechnologyDataFixture $dataFixture
+     * @param ValidatorInterface $validator
+     */
     public function __construct(TechnologyDataFixture $dataFixture, ValidatorInterface $validator)
     {
         $this->dataFixture = $dataFixture;

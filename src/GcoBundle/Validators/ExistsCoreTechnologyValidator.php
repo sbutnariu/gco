@@ -2,7 +2,6 @@
 
 namespace GcoBundle\Validators;
 use GcoBundle\Service\CoreTechnologyService;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -11,11 +10,8 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class ExistsCoreTechnologyValidator extends ConstraintValidator
 {
-    /** @var DaoRepository */
+    /** @var $coreTechnologyService */
     private $coreTechnologyService;
-
-    /** @var MarketingInfoApiInterface */
-    private $marketingInfoClient;
 
     public function __construct(CoreTechnologyService $coreTechnologyService)
     {

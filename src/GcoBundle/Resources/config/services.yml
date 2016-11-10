@@ -7,7 +7,7 @@ services:
     gco.user.service:
         class: 'GcoBundle\Service\UserService'
         arguments:
-          - gco.user.df
+          - '@gco.user.df'
     gco.user.df:
         class: 'GcoBundle\DataFixture\UserDataFixture'
         arguments:
@@ -21,8 +21,8 @@ services:
     gco.technology.service:
             class: 'GcoBundle\Service\TechnologyService'
             arguments:
-              - @gco.technology.df
-              - @validator
+              - '@gco.technology.df'
+              - '@validator'
     gco.technology.df:
         class: 'GeoBundle\Controller\TechnologyDataFixture'
         arguments:
@@ -38,5 +38,5 @@ services:
     gco.core_technology.service:
             class: 'GcoBundle\Service\CoreTechnologyService'
             arguments:
-              - @gco.technology.df
-              - @validator
+              - '@gco.technology.df'
+              - '@validator'
