@@ -28,8 +28,6 @@ class CoreTechnologyControllerTest extends \PHPUnit_Framework_TestCase
             ->method('checkDuplicateCoreTechnology')
             ->will($this->returnValue(TRUE));
         
-        
-        
         $ctrl = new CoreTechnologyController($serviceMock);
 
         $request = new Request(array(), array(), array(), array(), array(), array(), $coreTechnologyName);
