@@ -2,3 +2,11 @@ gco_get_user:
     path: /user/{id}
     defaults: {_controller: 'gco.user.controller:getUserAction'}
     methods: [GET]
+add_skill:
+    path:       user/{id}/skill
+    defaults:   { _controller: 'gco.skill.controller:addAction' }  
+    methods: [PUT]
+    requirements:
+        id: \d+
+        level_id: \d+
+        tech_id: \d+
