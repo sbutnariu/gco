@@ -2,11 +2,7 @@
 
 namespace GcoBundle\DataFixture;
 
-
-use Symfony\Bridge\Doctrine;
-use Doctrine\Bundle\DoctrineBundle\Registry;
-use GcoBundle\Entity\CoreTechnology;
-
+use Doctrine\ORM\EntityManager;
 
 class CoreTechnologyDataFixture{
     
@@ -16,9 +12,9 @@ class CoreTechnologyDataFixture{
     * 
     * @param Registry $doctrine
     */
-    public function __construct(Registry $doctrine)
+    public function __construct(EntityManager $entityManager)
     {
-        $this->doctrine = $doctrine;
+        $this->em =  $entityManager;
     }
 
      /**
@@ -29,11 +25,11 @@ class CoreTechnologyDataFixture{
     {
         $coreTechnology = new CoreTechnology();
         $coreTechnology->setTechnology($technologyName);       
-        $em = $this->doctrine->getManager();
-        $em->persist($coreTechnology);
-        $em->flush();
+       
+        $this->em->persist($coreTechnology);
+        $this->em->flush();
+        $this->em->clear();
 
-       // return new Response('Saved new technology with id '.$coreTechnology->getId());
         
     }
     
@@ -44,8 +40,7 @@ class CoreTechnologyDataFixture{
      */
     public function checkDuplicateCoreTechnology($technologyName){
         $isDuplicate = false;
-        $em = $this->doctrine->getManager();
-        $connection = $em->getConnection();
+        $connection = $this->em->getConnection();
         $statement = $connection->prepare("SELECT * FROM core_technology WHERE technology = :technology");        
         $statement->bindValue('technology', $technologyName);        
         $statement->execute();

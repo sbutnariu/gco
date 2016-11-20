@@ -40,4 +40,4 @@ services:
     gco.core_technology.data_fixture:
         class: 'GcoBundle\DataFixture\CoreTechnologyDataFixture'
         arguments:
-            - '@doctrine'
+            - '@doctrine.orm.entity_manager'
