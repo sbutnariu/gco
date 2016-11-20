@@ -22,7 +22,16 @@ class UserSkill
      */
     private $levelId;
 
-
+    public function __construct(
+        $userId,
+        $technologyId,
+        $levelId
+    )
+    {
+        $this->userId = $userId;
+        $this->technologyId = $technologyId;
+        $this->levelId = $levelId;
+    }
     /**
      * Set userId
      *

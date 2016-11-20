@@ -1,0 +1,7 @@
+services:
+    gco.technology.technology_exists:
+        class: 'GcoBundle\Validators\Constraints\TechnologyExistsValidator'
+        arguments:
+            - '@gco.skill.skill_service'
+        tags:
+            - { name: validator.constraint_validator }

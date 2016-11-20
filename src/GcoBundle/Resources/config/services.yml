@@ -9,11 +9,24 @@ services:
 #        class: 'GcoBundle\Service\UserService'
 #        arguments:
 #          - gco.user.orm
+    gco.skill.controller:
+        class: 'GcoBundle\Controller\SkillController'
+        arguments: 
+            - '@gco.skill.skill_service'                        
     gco.user.df:
         class: 'GcoBundle\DataFixture\UserDataFixture'
         arguments:
           - '@doctrine'
-          
+    gco.skill.usf:
+        class: 'GcoBundle\DataFixture\UserSkillFixture'
+        arguments:
+            - '@doctrine.orm.entity_manager'
+    gco.skill.skill_service:
+        class: 'GcoBundle\Service\SkillService'
+        arguments:
+            - '@gco.skill.usf'
+            - '@validator'
+
     gco.core_technology.controller:
         class: 'GcoBundle\Controller\CoreTechnologyController'
         arguments:
