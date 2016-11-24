@@ -14,9 +14,10 @@ GcoBundle\Entity\UserSkill:
                 
                 
 GcoBundle\Entity\CoreTechnologyEntity:
-    properties:
-        name:
+    properties:            
+        coreTechnologyName:
+            - GcoBundle\Validators\Constraints\CoreTechnologyExists: ~
             - NotBlank: 
-                message: Invalid user Technology Name 
+                message: Invalid Core Technology Name 
                 groups: [test]
        

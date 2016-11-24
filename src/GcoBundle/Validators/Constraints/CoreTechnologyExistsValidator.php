@@ -6,20 +6,20 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
-use GcoBundle\Service\SkillService;
+use GcoBundle\Service\CoreTechnologyService;
 
-class TechnologyExistsValidator extends ConstraintValidator
+class CoreTechnologyExistsValidator extends ConstraintValidator
 {
     /**
-     * @var SkillService
+     * @var CoreTechnologyService
      */
-    private $skillService;
+    private $coreTechnologyService;
     /**     
-     * @param SkillService
+     * @param CoreTechnologyService
      */
-    public function __construct(SkillService $skill)
+    public function __construct(CoreTechnologyService $coreTechnology)
     {        
-        $this->skillService = $skill;
+        $this->coreTechnologyService = $coreTechnology;
     }
     
     /**
@@ -27,10 +27,10 @@ class TechnologyExistsValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        if(!$constraint instanceof TechnologyExists) {
+        if(!$constraint instanceof CoreTechnologyExists) {
             throw new UnexpectedTypeException(
                 $constraint,
-                __NAMESPACE__ . '\TechnologyExists'
+                __NAMESPACE__ . '\CoreTechnologyExists'
             );
         }
         
@@ -38,14 +38,13 @@ class TechnologyExistsValidator extends ConstraintValidator
             return;
         }
         
-        if (!is_int($value)) {
-            throw new UnexpectedTypeException($value, 'integer');
+        if (empty($value)) {
+            throw new UnexpectedTypeException($value, '');
         }
                 
-        $exists = $this->skillService->technologyExists($value);
+        $exists = $this->coreTechnologyService->coreTechnologyExists($value);
         
-        if(!$exists) {
-            //throw new ConflictHttpException($constraint->message);
+        if($exists) {
             $this->context->addViolation($constraint->message);
         }
         

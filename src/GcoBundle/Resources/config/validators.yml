@@ -5,3 +5,10 @@ services:
             - '@gco.skill.skill_service'
         tags:
             - { name: validator.constraint_validator }
+            
+    gco.technology.technology_exists:
+        class: 'GcoBundle\Validators\Constraints\CoreTechnologyExistsValidator'
+        arguments:
+            - '@gco.coreTechnology.coreTechnology_service'
+        tags:
+            - { name: validator.constraint_validator }

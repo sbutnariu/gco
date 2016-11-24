@@ -32,7 +32,7 @@ class CoreTechnologyController  extends Controller{
      * @param Request $request
      * @return Response
      */
-    public function addCoreTechnologyAction(Request $request) //rename to addAction
+    public function addAction(Request $request)
     {
         $coreTechnology = new CoreTechnology();
         $content = $request->getContent();        
@@ -43,7 +43,6 @@ class CoreTechnologyController  extends Controller{
             return new Response(getRouteTechnology.$id, Response::HTTP_CREATED);
         }
         catch (CoreTechnologyAlreadyExistsException $ex){
-            //return new Response('Technology'.$coreTechnologyName.' already in datebase', Response::HTTP_BAD_REQUEST);
             throw new BadRequestHttpException($ex->getMessage(),$ex); 
         }
         

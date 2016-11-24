@@ -9,10 +9,8 @@ add_skill:
     requirements:
         id: \d+
         level_id: \d+
-        tech_id: \d+
-
-    
+        tech_id: \d+    
 gco_core_technology:
     path: /technology/core
-    defaults: {_controller: 'gco.core_technology.controller:addCoreTechnologyAction'}
+    defaults: {_controller: 'gco.core_technology.controller:addAction'}
     methods: [POST]

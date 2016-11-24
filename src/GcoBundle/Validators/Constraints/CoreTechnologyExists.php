@@ -5,11 +5,11 @@ namespace GcoBundle\Validators\Constraints;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * Check if the technology exists in the DB
+ * Check if the core technology exists in the DB
  */
-class TechnologyExists extends Constraint
+class CoreTechnologyExists extends Constraint
 {
-    public $message = 'Technology does not exist';
+    public $message = 'This technology is already in database';
     
     public function validatedBy()
     {
