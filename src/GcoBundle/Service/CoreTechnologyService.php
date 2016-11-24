@@ -5,7 +5,12 @@ namespace GcoBundle\Service;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use GcoBundle\DataFixture\CoreTechnologyDataFixture;
-use GcoBundle\Exception\CoreTechnologyAlreadyExistsException;
+use GcoBundle\Exceptions\CoreTechnologyAlreadyExistsException;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use GcoBundle\Exceptions\InvalidParameterException;
+use GcoBundle\Entity\CoreTechnology;
+
 
 class CoreTechnologyService {
     /**
@@ -13,36 +18,47 @@ class CoreTechnologyService {
      */
     private $dataFixture;
     
+    /**
+     *
+     * @var ValidatorInterface 
+     */
+    private $validator;
+    
      /**
      *
      * @param DataFixture   $dataFixture
+     * @param ValidatorInterface $validator
      */
-    public function __construct(CoreTechnologyDataFixture $dataFixture)
+    public function __construct(CoreTechnologyDataFixture $dataFixture, ValidatorInterface $validator)
     {
          $this->dataFixture = $dataFixture;
+         $this->validator = $validator;
     }
 
-    public function getCoreTechnology($name)
-    {
-       // to be implemented
-    }
     
     /**
      *
      * @param  coreTechnologyName
      */
     
-    public function addCoreTechnology($coreTechnologyName)
+    public function addCoreTechnology(CoreTechnology $coreTechnologyName)
     {
-        // check if the technology doesn't exist in DB
-        $isDuplicateTechnology = $this->dataFixture->checkDuplicateCoreTechnology($coreTechnologyName);
+       
+        $errors = $this->validator->validate($coreTechnologyName);
         
-        if ($isDuplicateTechnology){
-            throw new CoreTechnologyAlreadyExistsException('Core technology '.$coreTechnologyName.' already exists');
+        if (count($errors) > 0) {
+            throw new InvalidParameterException('Invalid parameters :' . $errors->get(0)->getMessage());
         }
+        // check if the technology doesn't exist in DB
+        // to do: creat validator constraints
+      /*   $isDuplicateTechnology = $this->dataFixture->checkDuplicateCoreTechnology($coreTechnologyName);
+        
+       if ($isDuplicateTechnology){
+            throw new CoreTechnologyAlreadyExistsException('Core technology '.$coreTechnologyName.' already exists');
+        }*/
         
         // add technology to DB
-        $this->dataFixture->setCoreTechnology($coreTechnologyName);
+       return $this->dataFixture->setCoreTechnology($coreTechnologyName);
            
     }
 

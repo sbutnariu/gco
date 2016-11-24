@@ -1,0 +1,22 @@
+GcoBundle\Entity\UserSkill:
+    properties:
+        userId:
+            - Type: { type: integer, message: Invalid user ID }             
+        technologyId:
+            - GcoBundle\Validators\Constraints\TechnologyExists: ~
+        levelId:
+            - Type: { type: integer, message: Invalid level value }             
+            - Range:
+                min: 1
+                max: 5
+                minMessage: Invalid level value [1,5]
+                maxMessage: Invalid level value [1,5]
+                
+                
+GcoBundle\Entity\CoreTechnologyEntity:
+    properties:
+        name:
+            - NotBlank: 
+                message: Invalid user Technology Name 
+                groups: [test]
+       

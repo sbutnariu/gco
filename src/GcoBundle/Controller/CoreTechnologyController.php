@@ -1,19 +1,17 @@
 <?php
 namespace GcoBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use GcoBundle\Service\CoreTechnologyService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use GcoBundle\Service\CoreTechnologyService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Validator\Constraints;
+use GcoBundle\Exceptions\InvalidParameterException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+use GcoBundle\Entity\CoreTechnology;
 
-use Symfony\Component\Validator\Validation;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
-
-/**
- * Core Technology Controller
- */
 
 class CoreTechnologyController  extends Controller{ 
     
@@ -26,6 +24,7 @@ class CoreTechnologyController  extends Controller{
     public function __construct(CoreTechnologyService $coreTechnologyService)
     {
         $this->coreTechnologyService = $coreTechnologyService;
+
     }
 
     /**
@@ -33,29 +32,21 @@ class CoreTechnologyController  extends Controller{
      * @param Request $request
      * @return Response
      */
-    public function addCoreTechnologyAction(Request $request)
+    public function addCoreTechnologyAction(Request $request) //rename to addAction
     {
+        $coreTechnology = new CoreTechnology();
         $content = $request->getContent();        
-        $params = json_decode($content, true);
-        $coreTechnologyName = $params['name'];
-        
-        // check if technology name is not empty
-        $validator = Validation::createValidator();        
-        $errors = $validator->validate($coreTechnologyName, array(new NotBlank()));
-        
-        if (count($errors) > 0) {
-           $errorsString = (string) $errors;
-            return new Response($errorsString,Response::HTTP_BAD_REQUEST);
-        }
-        
+        $params = json_decode($content, true);             
+        $coreTechnology->setTechnology($params['name']);
         try{
-            $this->coreTechnologyService->addCoreTechnology($coreTechnologyName);
-            return new Response('Core technology "'.$coreTechnologyName.'" inserted ', Response::HTTP_CREATED);
+            $this->coreTechnologyService->addCoreTechnology($coreTechnology);
+            return new Response(getRouteTechnology.$id, Response::HTTP_CREATED);
         }
         catch (CoreTechnologyAlreadyExistsException $ex){
-            return new Response('Technology'.$coreTechnologyName.' already in datebase', Response::HTTP_BAD_REQUEST);
+            //return new Response('Technology'.$coreTechnologyName.' already in datebase', Response::HTTP_BAD_REQUEST);
+            throw new BadRequestHttpException($ex->getMessage(),$ex); 
         }
         
-       
+       return new Response('', Response::HTTP_NO_CONTENT);
     }
 }
