@@ -25,7 +25,6 @@ services:
     gco.validator:
         class: 'GcoBundle\Validator\Validator'
     gco.technology.service:
-        class: 'GcoBundle\Service\TechService'
+        class: 'GcoBundle\Service\TechnologyService'
         arguments:
-          - '@gco.validator'
           - '@gco.list.technology'

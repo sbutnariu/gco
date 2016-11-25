@@ -5,5 +5,5 @@ gco_get_user:
 
 gco_get_list_technologies:
     path: /list/{technology}
-    defaults: {_controller: 'gco.technology.controller:getListTechnologiesAction'}
+    defaults: {_controller: 'gco.technology.controller:getListTechnologiesAction' }
     methods: [GET]
