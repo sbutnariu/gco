@@ -7,16 +7,16 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CoreTechnologyControllerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetCoreTechnologyAction()
+    public function testAddAction()
     {
         $coreTechnologyName = 'php';
         
         $fixtureMock = $this->getMockBuilder('GcoBundle\DataFixture\CoreTechnologyDataFixture')->disableOriginalConstructor()->getMock();
         
-        $fixtureMock->expects($this->any())
+       /* $fixtureMock->expects($this->any())
             ->method('checkDuplicateCoreTechnology')
             ->will($this->returnValue(TRUE));
-        
+        */
         
         
         $serviceMock = $this->getMockBuilder('GcoBundle\Service\CoreTechnologyService')

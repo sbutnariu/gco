@@ -17,13 +17,13 @@ class CoreTechnologyService {
      * @var DataFixture
      */
     private $dataFixture;
-    
+
     /**
      *
-     * @var ValidatorInterface 
+     * @var ValidatorInterface
      */
     private $validator;
-    
+
      /**
      *
      * @param DataFixture   $dataFixture
@@ -35,31 +35,27 @@ class CoreTechnologyService {
          $this->validator = $validator;
     }
 
-    
+
     /**
      *
      * @param  coreTechnologyName
      */
-    
-    public function addCoreTechnology(CoreTechnology $coreTechnologyName)
+
+    public function addCoreTechnology(CoreTechnology $coreTechnology)
     {
-       
-        $errors = $this->validator->validate($coreTechnologyName);
-        
+
+        $errors = $this->validator->validate($coreTechnology); // de confirmat ca e ok.
+
         if (count($errors) > 0) {
             throw new InvalidParameterException('Invalid parameters :' . $errors->get(0)->getMessage());
         }
-        // check if the technology doesn't exist in DB
-        // to do: creat validator constraints
-      /*   $isDuplicateTechnology = $this->dataFixture->checkDuplicateCoreTechnology($coreTechnologyName);
-        
-       if ($isDuplicateTechnology){
-            throw new CoreTechnologyAlreadyExistsException('Core technology '.$coreTechnologyName.' already exists');
-        }*/
-        
         // add technology to DB
-       return $this->dataFixture->setCoreTechnology($coreTechnologyName);
-           
+       return $this->dataFixture->setCoreTechnology($coreTechnology);
+
+    }
+
+    public function getTechnologyByName($coreTechnologyName){
+        return $this->dataFixture->getTechnologyByName($coreTechnologyName);
     }
 
 }

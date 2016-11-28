@@ -6,9 +6,9 @@ services:
         tags:
             - { name: validator.constraint_validator }
             
-    gco.technology.technology_exists:
+    gco.core_technology.technology_exists:
         class: 'GcoBundle\Validators\Constraints\CoreTechnologyExistsValidator'
         arguments:
-            - '@gco.coreTechnology.coreTechnology_service'
+            - '@gco.core_technology.service'
         tags:
             - { name: validator.constraint_validator }

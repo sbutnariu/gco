@@ -14,14 +14,14 @@ class TechnologyExistsValidator extends ConstraintValidator
      * @var SkillService
      */
     private $skillService;
-    /**     
+    /**
      * @param SkillService
      */
     public function __construct(SkillService $skill)
-    {        
+    {
         $this->skillService = $skill;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -33,22 +33,22 @@ class TechnologyExistsValidator extends ConstraintValidator
                 __NAMESPACE__ . '\TechnologyExists'
             );
         }
-        
+
          if (empty($value)) {
             return;
         }
-        
+
         if (!is_int($value)) {
             throw new UnexpectedTypeException($value, 'integer');
         }
-                
+
         $exists = $this->skillService->technologyExists($value);
-        
-        if(!$exists) {
+
+        if($exists) {
             //throw new ConflictHttpException($constraint->message);
             $this->context->addViolation($constraint->message);
         }
-        
+
     }
 }
 
