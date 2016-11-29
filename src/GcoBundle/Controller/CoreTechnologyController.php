@@ -34,7 +34,7 @@ class CoreTechnologyController  extends Controller{
      */
     public function addAction(Request $request)
     {
-       $coreTechnology = $this->createCoreTechnology();
+       $coreTechnology = $this->createCoreTechnology($request);
         try{
             $this->coreTechnologyService->addCoreTechnology($coreTechnology);
           #  $routeCollection = $this -> get('router') -> getRouteCollection();
@@ -48,14 +48,14 @@ class CoreTechnologyController  extends Controller{
 
        return new Response('', Response::HTTP_NO_CONTENT);
     }
-    
-    
-    public static function createCoreTechnology(){
+
+
+    public static function createCoreTechnology($request){
         $coreTechnology = new CoreTechnology();
         $content = $request->getContent();
         $params = json_decode($content, true);
         $coreTechnology->setTechnology($params['name']);
-        
+
         return $coreTechnology;
     }
 }

@@ -44,14 +44,14 @@ class CoreTechnologyService {
     public function addCoreTechnology(CoreTechnology $coreTechnology)
     {
 
-        $errors = $this->validator->validate($coreTechnology); // de confirmat ca e ok.
+        $errors = $this->validator->validate($coreTechnology); 
 
         if (count($errors) > 0) {
             throw new InvalidParameterException('Invalid parameters :' . $errors->get(0)->getMessage());
         }
         // add technology to DB
         $this->dataFixture->setCoreTechnology($coreTechnology);
-        
+
         return $coreTechnology;
     }
 
