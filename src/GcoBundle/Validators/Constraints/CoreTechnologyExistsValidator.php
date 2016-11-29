@@ -14,14 +14,14 @@ class CoreTechnologyExistsValidator extends ConstraintValidator
      * @var CoreTechnologyService
      */
     private $coreTechnologyService;
-    /**     
+    /**
      * @param CoreTechnologyService
      */
     public function __construct(CoreTechnologyService $coreTechnology)
-    {        
+    {
         $this->coreTechnologyService = $coreTechnology;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -33,21 +33,21 @@ class CoreTechnologyExistsValidator extends ConstraintValidator
                 __NAMESPACE__ . '\CoreTechnologyExists'
             );
         }
-        
+
          if (empty($value)) {
             return;
         }
-        
+
         if (empty($value)) {
             throw new UnexpectedTypeException($value, '');
         }
-                
-        $exists = $this->coreTechnologyService->coreTechnologyExists($value);
-        
+
+        $exists = $this->coreTechnologyService->getTechnologyByName($value);
+
         if($exists) {
             $this->context->addViolation($constraint->message);
         }
-        
+
     }
 }
 

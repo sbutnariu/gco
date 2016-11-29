@@ -13,11 +13,11 @@ use GcoBundle\Entity\CoreTechnology;
 
 
 
-class CoreTechnologyController  extends Controller{ 
-    
+class CoreTechnologyController  extends Controller{
+
     /** @var coreTechnologyService */
     private $coreTechnologyService;
-    
+
     /**
      * @param CoreTechnologyService $coreTechnologyService
      */
@@ -35,17 +35,17 @@ class CoreTechnologyController  extends Controller{
     public function addAction(Request $request)
     {
         $coreTechnology = new CoreTechnology();
-        $content = $request->getContent();        
-        $params = json_decode($content, true);             
+        $content = $request->getContent();
+        $params = json_decode($content, true);
         $coreTechnology->setTechnology($params['name']);
         try{
             $this->coreTechnologyService->addCoreTechnology($coreTechnology);
-            return new Response(getRouteTechnology.$id, Response::HTTP_CREATED);
+            return new Response("ruta catre get  core technology ".$coreTechnology->getTechnology(), Response::HTTP_CREATED);// to do: return get core technology route
         }
-        catch (CoreTechnologyAlreadyExistsException $ex){
-            throw new BadRequestHttpException($ex->getMessage(),$ex); 
+        catch (InvalidParameterException $ex){
+            throw new BadRequestHttpException($ex->getMessage(),$ex);
         }
-        
+
        return new Response('', Response::HTTP_NO_CONTENT);
     }
 }

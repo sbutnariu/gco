@@ -6,11 +6,11 @@ use Doctrine\ORM\EntityManager;
 use GcoBundle\Entity\CoreTechnology;
 
 class CoreTechnologyDataFixture{
-    
+
     private $em;
-    
+
     /**
-    * 
+    *
     * @param Registry $doctrine
     */
     public function __construct(EntityManager $entityManager)
@@ -23,30 +23,26 @@ class CoreTechnologyDataFixture{
      * @param string $technologyName
      */
     public function setCoreTechnology(CoreTechnology $coreTechnology)
-    {    
-       
+    {
         $this->em->persist($coreTechnology);
         $this->em->flush();
-        $this->em->clear();        
+        $this->em->clear();
     }
-    
+
     /**
      * check if the core technology already exists in database
      *
      * @param string $technologyName
      */
-    public function checkDuplicateCoreTechnology($technologyName){
-        $isDuplicate = false;
+   public function getTechnologyByName($technologyName){
+
         $connection = $this->em->getConnection();
-        $statement = $connection->prepare("SELECT * FROM core_technology WHERE technology = :technology");        
-        $statement->bindValue('technology', $technologyName);        
+        $statement = $connection->prepare("SELECT * FROM core_technology WHERE technology = :technology");
+        $statement->bindValue('technology', $technologyName);
         $statement->execute();
         $results = $statement->fetchAll();
-        if(!empty($results)){
-            $isDuplicate = true;
-        }
-        
-        return $isDuplicate;
-        
+
+        return $results;
+
     }
 }

@@ -13,11 +13,11 @@ GcoBundle\Entity\UserSkill:
                 maxMessage: Invalid level value [1,5]
                 
                 
-GcoBundle\Entity\CoreTechnologyEntity:
+GcoBundle\Entity\CoreTechnology:
     properties:            
-        coreTechnologyName:
+        technology:
             - GcoBundle\Validators\Constraints\CoreTechnologyExists: ~
             - NotBlank: 
                 message: Invalid Core Technology Name 
-                groups: [test]
+               
        
