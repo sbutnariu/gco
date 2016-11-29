@@ -34,12 +34,12 @@ class CoreTechnologyController  extends Controller{
      */
     public function addAction(Request $request)
     {
-        $coreTechnology = new CoreTechnology();
-        $content = $request->getContent();
-        $params = json_decode($content, true);
-        $coreTechnology->setTechnology($params['name']);
+       $coreTechnology = $this->createCoreTechnology();
         try{
             $this->coreTechnologyService->addCoreTechnology($coreTechnology);
+          #  $routeCollection = $this -> get('router') -> getRouteCollection();
+          #  $routeCollection->get($name);
+          #  $routeCollection->all();
             return new Response("ruta catre get  core technology ".$coreTechnology->getTechnology(), Response::HTTP_CREATED);// to do: return get core technology route
         }
         catch (InvalidParameterException $ex){
@@ -47,5 +47,15 @@ class CoreTechnologyController  extends Controller{
         }
 
        return new Response('', Response::HTTP_NO_CONTENT);
+    }
+    
+    
+    public static function createCoreTechnology(){
+        $coreTechnology = new CoreTechnology();
+        $content = $request->getContent();
+        $params = json_decode($content, true);
+        $coreTechnology->setTechnology($params['name']);
+        
+        return $coreTechnology;
     }
 }

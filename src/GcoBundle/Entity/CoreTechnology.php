@@ -38,8 +38,6 @@ class CoreTechnology
     public function setTechnology($technology)
     {
         $this->technology = $technology;
-
-        return $this;
     }
 
     /**

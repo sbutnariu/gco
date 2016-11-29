@@ -50,8 +50,9 @@ class CoreTechnologyService {
             throw new InvalidParameterException('Invalid parameters :' . $errors->get(0)->getMessage());
         }
         // add technology to DB
-       return $this->dataFixture->setCoreTechnology($coreTechnology);
-
+        $this->dataFixture->setCoreTechnology($coreTechnology);
+        
+        return $coreTechnology;
     }
 
     public function getTechnologyByName($coreTechnologyName){
