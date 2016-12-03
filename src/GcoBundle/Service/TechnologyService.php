@@ -1,10 +1,9 @@
 <?php
 
 namespace GcoBundle\Service;
+
 use GcoBundle\DataFixture\TechnologyDataFixture;
 use GcoBundle\Factory\TechnologyFactory;
-use GcoBundle\Exceptions\InvalidConfigurationException;
-use GcoBundle\Exceptions\InvalidParametersException;
 
 class TechnologyService
 {

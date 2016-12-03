@@ -20,6 +20,7 @@ class TechnologyController
 
     /**
      * get list of technology
+     * @param $request
      * @param $technology
      * @return Response
      */

@@ -1,6 +1,7 @@
 <?php
 
 namespace GcoBundle\Factory;
+
 use GcoBundle\Entity\Technology;
 
 class TechnologyFactory
