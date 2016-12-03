@@ -36,6 +36,7 @@ class TechnologyServiceTest extends\PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param $technologyArray
      * @dataProvider providerGetTechnology
      */
     public function testGetListOfTechnologies($technologyArray) {

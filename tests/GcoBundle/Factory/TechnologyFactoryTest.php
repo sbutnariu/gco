@@ -20,6 +20,7 @@ class TechnologyFactoryTest  extends\PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param $technologyArray
      * @dataProvider providerCreateTechnology
      */
     public function testCreateTechnology($technologyArray)
