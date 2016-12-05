@@ -11,6 +11,11 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use GcoBundle\Entity\CoreTechnology;
 
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\Route;
+
 
 
 class CoreTechnologyController  extends Controller{
@@ -37,14 +42,16 @@ class CoreTechnologyController  extends Controller{
        $coreTechnology = $this->createCoreTechnology($request);
         try{
             $this->coreTechnologyService->addCoreTechnology($coreTechnology);
-          #  $routeCollection = $this -> get('router') -> getRouteCollection();
-          #  $routeCollection->get($name);
-          #  $routeCollection->all();
-            return new Response("ruta catre get  core technology ".$coreTechnology->getTechnology(), Response::HTTP_CREATED);// to do: return get core technology route
+          // var_dump( $this->getTechnologyRoute());
+            return new Response("/technology/core/".$coreTechnology->getId(), Response::HTTP_CREATED);// to do: return get core technology route
+        }
+        catch (CoreTechnologyExists $ex ){
+            throw new BadRequestHttpException($ex->getMessage(),$ex);
         }
         catch (InvalidParameterException $ex){
             throw new BadRequestHttpException($ex->getMessage(),$ex);
         }
+
 
        return new Response('', Response::HTTP_NO_CONTENT);
     }
@@ -57,5 +64,20 @@ class CoreTechnologyController  extends Controller{
         $coreTechnology->setTechnology($params['name']);
 
         return $coreTechnology;
+    }
+
+    public function getTechnologyRoute(){
+        // inject router in controller
+       // $route = new Route('/foo', array('controller' => 'MyController'));
+        $routes = new RouteCollection();
+
+       // $routes->add('route_name', $route);
+
+        $context = new RequestContext('/technology/core');
+
+        $matcher = new UrlMatcher($routes, $context);
+
+       // $parameters = $matcher->match('/foo');
+        return $matcher;
     }
 }

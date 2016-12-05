@@ -21,29 +21,23 @@ class CoreTechnologyServiceTest extends \PHPUnit_Framework_TestCase {
         return $request;
     }
 
-    public function testAddCoreTechnology(CoreTechnology $coreTechnology)
+    public function testAddCoreTechnology()
     {
-
         $request = $this->createRequest();
         $coreTechnologyEntity = CoreTechnologyController::createCoreTechnology($request);
+        $dataFixtureMock = $this->getMockBuilder('GcoBundle\DataFixture\CoreTechnologyDataFixture')->disableOriginalConstructor()->getMock();
+        $validatorMock = $this->getMockBuilder('GcoBundle\Exceptions\InvalidParameterException')->disableOriginalConstructor()->getMock();
 
-        $serviceMock = $this->getMockBuilder('GcoBundle\Service\CoreTechnologyService')->disableOriginalConstructor()->getMock();
-        $serviceMock->expects($coreTechnologyEntity)
+
+
+        $service = new CoreTechnologyService($dataFixtureMock, $validatorMock);
+        $actualResponse = $service->addCoreTechnology($coreTechnologyEntity);
+
+          $validatorMock->expects($coreTechnologyEntity)
             ->method('addCoreTechnology')
-            ->shouldBeCalledTimes(1)->willReturn(7);
+            ->shouldBeCalledTimes(1)->willReturn(201);
 
-
-        $coreTechnology = $this->createRequest();
-
-        $errors = $this->validator->validate($coreTechnology);
-
-        if (count($errors) > 0) {
-            throw new InvalidParameterException('Invalid parameters :' . $errors->get(0)->getMessage());
-        }
-        // add technology to DB
-        $this->dataFixture->setCoreTechnology($coreTechnology);
-
-        return $coreTechnology;
+        $this->assertEquals($coreTechnologyEntity, $actualResponse);
     }
 
 

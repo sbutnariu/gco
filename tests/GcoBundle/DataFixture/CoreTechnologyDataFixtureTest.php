@@ -1,31 +1,20 @@
 <?php
-
-namespace GcoBundle\DataFixture;
-
 use Doctrine\ORM\EntityManager;
 use GcoBundle\Entity\CoreTechnology;
 
-class CoreTechnologyDataFixture{
+class CoreTechnologyDataFixtureTest {
 
-    private $em;
 
-    /**
-    *
-    * @param Registry $doctrine
-    */
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->em =  $entityManager;
-    }
-
-     /**
+         /**
      *
      * @param string $technologyName
      */
-    public function saveCoreTechnology(CoreTechnology $coreTechnology)
+    public function setCoreTechnology(CoreTechnology $coreTechnology)
     {
-        $this->em->persist($coreTechnology);
-        $this->em->flush();
+        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+
+        $em->persist($coreTechnology);
+
     }
 
     /**
