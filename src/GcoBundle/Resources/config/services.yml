@@ -24,7 +24,7 @@ services:
               - '@gco.technology.df'
               - '@validator'
     gco.technology.df:
-        class: 'GcoBundle\Controller\TechnologyDataFixture'
+        class: 'GcoBundle\DataFixture\TechnologyDataFixture'
         arguments:
           - '@doctrine'
 

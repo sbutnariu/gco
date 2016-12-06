@@ -1,4 +1,5 @@
 <?php
+namespace GcoBundle\Exceptions;
 class NotFoundException extends \Exception
 {
     const ERROR_MESSAGE = "The resource requested was not found";

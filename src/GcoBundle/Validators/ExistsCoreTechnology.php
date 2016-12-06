@@ -13,6 +13,7 @@ class ExistsCoreTechnology extends Constraint
 
     public function validatedBy()
     {
-        return 'gco_core_technology_exists';
+        /*return 'gco_core_technology_exists';*/
+        return get_class($this).'Validator';
     }
 }

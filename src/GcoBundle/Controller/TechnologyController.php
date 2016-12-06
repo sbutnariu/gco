@@ -10,7 +10,8 @@ use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use GcoBundle\Service\TechnologyService;
-
+use GcoBundle\Exceptions\WrongTypeException;
+use GcoBundle\Exceptions\NotFoundException;
 /**
  * Class TechnologyController
  * @package GcoBundle\Controller
@@ -49,11 +50,11 @@ class TechnologyController
         {
             $technology = $this->service->getTechnology($id);
         }
-        catch(\WrongTypeException $e)
+        catch(WrongTypeException $e)
         {
             throw new BadRequestHttpException($e->getMessage());
         }
-        catch (\NotFoundException $e)
+        catch (NotFoundException $e)
         {
             throw new NotFoundHttpException($e->getMessage());
         }
@@ -81,11 +82,11 @@ class TechnologyController
         {
             $technology = $this->service->addTechnology($newTechnology);
         }
-        catch(\WrongTypeException $e)
+        catch(WrongTypeException $e)
         {
             throw new BadRequestHttpException($e->getMessage());
         }
-        catch (\NotFoundException $e)
+        catch (NotFoundException $e)
         {
             throw new NotFoundHttpException($e->getMessage());
         }

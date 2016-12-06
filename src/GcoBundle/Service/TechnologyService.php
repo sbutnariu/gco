@@ -2,9 +2,13 @@
 
 namespace GcoBundle\Service;
 use GcoBundle\Entity\Technology;
+use GcoBundle\Factory\TechnologyFactory;
 use GcoBundle\DataFixture\TechnologyDataFixture;
+use GcoBundle\Validators\ExistsCoreTechnology;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use GcoBundle\Exceptions\NotFoundException;
+use GcoBundle\Exceptions\WrongTypeException;
 
 /**
  * Class TechnologyService
@@ -34,17 +38,19 @@ class TechnologyService
     }
 
     /**
-     * @param $id
+     * @param integer $id
      * @return null|Technology
-     * @throws \NotFoundException|\WrongTypeException
+     * @throws NotFoundException|WrongTypeException
      */
     public function getTechnology($id)
     {
-        if(!is_int($id))
-            throw new \WrongTypeException();
         $technology = $this->dataFixture->getTechnology($id);
-        if(is_null($technology))
-            throw new \NotFoundException();
+        /*$errors = $this->validator->validate($technology);
+        if (count($errors) > 0)
+        {
+            var_dump($errors);
+            throw new WrongTypeException();
+        }*/
         return $technology;
     }
 
@@ -53,26 +59,18 @@ class TechnologyService
      * Add new technology
      *
      * @param array $technology
-     * @return Technology
-     * @throws \WrongTypeException
+     * @return int
+     * @throws WrongTypeException
      */
     public function addTechnology(array $technology)
     {
-        if(
-            !is_array($technology)||
-            !isset($technology['coreTechnologyId'])||
-            !isset($technology['technologyName'])||
-            !is_int($technology['coreTechnologyId'])
-        )
-            throw new \WrongTypeException();
-        $newTechnology = new Technology();
-        $newTechnology->setCoreId($technology['coreTechnologyId']);
-        $newTechnology->setTechnology($technology['technologyName']);
-        $errors = $this->validator->validate($newTechnology);
+        $newTechnology = TechnologyFactory::create($technology);
+        $errors = $this->validator->validate($newTechnology, new ExistsCoreTechnology());
         if (count($errors) > 0)
         {
-            throw new \WrongTypeException();
+            var_dump($errors);
+            throw new WrongTypeException();
         }
-        return $this->dataFixture->addTechnology($newTechnology);
+        return $this->dataFixture->addTechnology($newTechnology)->getId();
     }
 }

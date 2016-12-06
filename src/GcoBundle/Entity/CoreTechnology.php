@@ -52,4 +52,3 @@ class CoreTechnology
         return $this->technology;
     }
 }
-

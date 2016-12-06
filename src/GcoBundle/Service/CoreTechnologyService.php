@@ -33,6 +33,7 @@ class CoreTechnologyService
     public function getTechnology($id)
     {
         $technology = new CoreTechnology();
+        $technology->setTechnology('Ana');
         return $technology;
     }
 

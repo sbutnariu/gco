@@ -4,7 +4,7 @@ GcoBundle\Entity\Technology:
 
   properties:
     coreId:
-      - Type: integer
+      - Type: numeric
 
     technology:
       - Type: string
