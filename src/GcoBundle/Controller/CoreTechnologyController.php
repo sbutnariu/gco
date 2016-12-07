@@ -42,7 +42,6 @@ class CoreTechnologyController  extends Controller{
        $coreTechnology = $this->createCoreTechnology($request);
         try{
             $this->coreTechnologyService->addCoreTechnology($coreTechnology);
-          // var_dump( $this->getTechnologyRoute());
             return new Response("/technology/core/".$coreTechnology->getId(), Response::HTTP_CREATED);// to do: return get core technology route
         }
         catch (CoreTechnologyExists $ex ){

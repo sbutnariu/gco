@@ -51,7 +51,7 @@ class CoreTechnologyService {
         // add technology to DB
         $this->dataFixture->saveCoreTechnology($coreTechnology);
 
-        return $coreTechnology;
+        //return $coreTechnology;
     }
 
     public function getTechnologyByName($coreTechnologyName){
