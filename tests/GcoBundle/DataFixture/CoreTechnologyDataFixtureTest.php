@@ -9,12 +9,21 @@ class CoreTechnologyDataFixtureTest {
      *
      * @param string $technologyName
      */
-    public function setCoreTechnology(CoreTechnology $coreTechnology)
+    public function testSetCoreTechnology()
     {
+        $coreTechnologyName = "{name:'php'}";
+        $coreTechnologyName= json_encode($coreTechnologyName);
+        $request = new Request(array(), $coreTechnologyName, array(), array(), array(), array(), null);        
+        $coreTechnologyEntity = CoreTechnologyController::createCoreTechnology($request);
+        
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
-
-        $em->persist($coreTechnology);
-
+        $em->expects($coreTechnologyEntity)
+            ->method('persist')
+            ->shouldBeCalledTimes(1);
+        
+        $em->expects($coreTechnologyEntity)
+            ->method('flush')
+            ->shouldBeCalledTimes(1);
     }
 
     /**
@@ -22,7 +31,7 @@ class CoreTechnologyDataFixtureTest {
      *
      * @param string $technologyName
      */
-   public function getTechnologyByName($technologyName){
+   public function testGetTechnologyByName($technologyName){
 
         $connection = $this->em->getConnection();
         $statement = $connection->prepare("SELECT * FROM core_technology WHERE technology = :technology");

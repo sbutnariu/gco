@@ -18,12 +18,9 @@ class CoreTechnologyControllerTest extends \PHPUnit_Framework_TestCase
     }
     public function testAddAction()
     {
-        $coreTechnologyName = 'php';
-
+        $coreTechnologyName = "{name:'php'}";
+        $coreTechnologyName= json_encode($coreTechnologyName);
         $request = new Request(array(), $coreTechnologyName, array(), array(), array(), array(), null);
-       // var_dump($request);
-     //   exit;
-        $request= json_encode($request);
 
         $coreTechnologyEntity = CoreTechnologyController::createCoreTechnology($request);
 
