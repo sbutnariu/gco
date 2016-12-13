@@ -2,9 +2,11 @@
 
 namespace GcoBundle\Controller;
 
+use GcoBundle\Exceptions\ExistsAlreadyException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -50,17 +52,9 @@ class TechnologyController
         {
             $technology = $this->service->getTechnology($id);
         }
-        catch(WrongTypeException $e)
-        {
-            throw new BadRequestHttpException($e->getMessage());
-        }
         catch (NotFoundException $e)
         {
-            throw new NotFoundHttpException($e->getMessage());
-        }
-        catch (\Exception $e)
-        {
-            throw new ServiceUnavailableHttpException($e->getMessage());
+            throw new NotFoundHttpException($e->getMessage(), $e);
         }
         $jsonContent = $this->serializer->serialize($technology, JsonEncoder::FORMAT);
 
@@ -82,17 +76,13 @@ class TechnologyController
         {
             $technology = $this->service->addTechnology($newTechnology);
         }
-        catch(WrongTypeException $e)
-        {
-            throw new BadRequestHttpException($e->getMessage());
-        }
         catch (NotFoundException $e)
         {
             throw new NotFoundHttpException($e->getMessage());
         }
-        catch (\Exception $e)
+        catch (ExistsAlreadyException $e)
         {
-            throw new ServiceUnavailableHttpException($e->getMessage());
+            throw new ConflictHttpException($e->getMessage());
         }
         $jsonContent = $this->serializer->serialize($technology, JsonEncoder::FORMAT);
         return new Response(null, Response::HTTP_CREATED, array("ETag"=>$jsonContent));

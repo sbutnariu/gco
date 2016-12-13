@@ -1,6 +1,7 @@
 GcoBundle\Entity\Technology:
   constraints:
      - GcoBundle\Validators\ExistsCoreTechnology
+     - GcoBundle\Validators\NoDuplicateTechnology
 
   properties:
     coreId:

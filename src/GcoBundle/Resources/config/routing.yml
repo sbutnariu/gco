@@ -8,6 +8,8 @@ gco_get_technology:
     path: /technology/{id}
     defaults: {_controller: 'gco.technology.controller:getTechnologyAction'}
     methods: [GET]
+    requirements:
+            id: '\d+'
 
 
 gco_post_technology:

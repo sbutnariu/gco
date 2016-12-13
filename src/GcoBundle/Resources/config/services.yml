@@ -35,6 +35,13 @@ services:
             tags:
                 - { name: validator.constraint_validator, alias: gco_core_technology_exists }
 
+    gco.validators.noDuplicateTechnology:
+                class: GcoBundle\Validators\NoDuplicateTechnologyValidator
+                arguments:
+                    - '@gco.technology.service'
+                tags:
+                    - { name: validator.constraint_validator, alias: gco_no_duplicate_technology }
+
     gco.core_technology.service:
             class: 'GcoBundle\Service\CoreTechnologyService'
             arguments:

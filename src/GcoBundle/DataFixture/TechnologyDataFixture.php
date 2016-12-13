@@ -37,8 +37,22 @@ class TechnologyDataFixture
         $technology = $this->doctrine
             ->getRepository('GcoBundle:Technology')
             ->find($id);
-
         return $technology;
+    }
+
+    /**
+     * @param Technology $technology
+     * @return null|int
+     */
+    public function getTechnologyId($technology)
+    {
+        $technologies = $this->doctrine
+            ->getRepository('GcoBundle:Technology')
+            ->findBy(
+                array('coreId' => $technology->getCoreId(),'technology' => $technology->getTechnology())
+            );
+
+        return (count($technologies)>0)?$technologies[0]->getId():null;
     }
 
     /**
