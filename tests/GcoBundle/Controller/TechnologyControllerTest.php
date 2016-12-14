@@ -3,6 +3,7 @@
 namespace Tests\GcoBundle\Controller;
 
 use GcoBundle\Controller\TechnologyController;
+use GcoBundle\Entity\Technology;
 use Symfony\Component\HttpFoundation\Request;
 
 class TechnologyControllerTest extends \PHPUnit_Framework_TestCase
@@ -31,6 +32,9 @@ class TechnologyControllerTest extends \PHPUnit_Framework_TestCase
         $serviceMock = $this->getMockBuilder('GcoBundle\Service\TechnologyService')
             ->disableOriginalConstructor()
             ->getMock();
+        $serviceMock->expects($this->any())
+            ->method('addTechnology')
+            ->will($this->returnValue(new Technology()));
         $serializerMock = $this->getMockBuilder('Symfony\Component\Serializer\SerializerInterface')
             ->disableOriginalConstructor()
             ->getMock();

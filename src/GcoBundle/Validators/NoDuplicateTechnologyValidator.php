@@ -25,11 +25,7 @@ class NoDuplicateTechnologyValidator extends ConstraintValidator
     public function validate($technology, Constraint $constraint)
     {
 
-        $technologyProperties = array(
-            'coreTechnologyId' => $technology->getCoreId(),
-            'technologyName' => $technology->getTechnology()
-        );
-        $technologyExists = $this->technologyService->getTechnologyId($technologyProperties);
+        $technologyExists = $this->technologyService->getTechnologyId($technology);
 
         if (!is_null($technologyExists)) {
             $this->context->addViolation($constraint->message);

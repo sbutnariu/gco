@@ -64,13 +64,12 @@ class TechnologyService
     /**
      * Get $technology id
      *
-     * @param array $technology
+     * @param Technology $technology
      * @return null|Technology
      * @throws NotFoundException|WrongTypeException
      */
-    public function getTechnologyId(array $technology)
+    public function getTechnologyId(Technology $newTechnology)
     {
-        $newTechnology = TechnologyFactory::create($technology);
         $technologyId = $this->dataFixture->getTechnologyId($newTechnology);
         return $technologyId;
     }
@@ -78,14 +77,13 @@ class TechnologyService
     /**
      * Add new technology
      *
-     * @param array $technology
-     * @return int
+     * @param Technology $technology
+     * @return Technology|null
      * @throws WrongTypeException
      */
-    public function addTechnology(array $technology)
+    public function addTechnology(Technology $newTechnology)
     {
         //create object on controller
-        $newTechnology = TechnologyFactory::create($technology);
         $validators = array(
             new ExistsCoreTechnology(),
             new NoDuplicateTechnology()
@@ -98,6 +96,6 @@ class TechnologyService
                     var_dump($exception);
                     throw new $exception();
         }
-        return $this->dataFixture->addTechnology($newTechnology)->getId();
+        return $this->dataFixture->addTechnology($newTechnology);
     }
 }

@@ -3,6 +3,7 @@
 namespace GcoBundle\Controller;
 
 use GcoBundle\Exceptions\ExistsAlreadyException;
+use GcoBundle\Factory\TechnologyFactory;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -68,9 +69,12 @@ class TechnologyController
      */
     public function addTechnologyAction(Request $request)
     {
-        $newTechnology = array(
-            'coreTechnologyId' => $request->get("core_id"),
-            'technologyName' => $request->get("technology_name")
+        $newTechnology =
+            TechnologyFactory::create(
+                array(
+                    'coreTechnologyId' => $request->get("core_id"),
+                    'technologyName' => $request->get("technology_name")
+                )
         );
         try
         {
@@ -84,7 +88,7 @@ class TechnologyController
         {
             throw new ConflictHttpException($e->getMessage());
         }
-        $jsonContent = $this->serializer->serialize($technology, JsonEncoder::FORMAT);
+        $jsonContent = $this->serializer->serialize($technology->getId(), JsonEncoder::FORMAT);
         return new Response(null, Response::HTTP_CREATED, array("ETag"=>$jsonContent));
     }
 }

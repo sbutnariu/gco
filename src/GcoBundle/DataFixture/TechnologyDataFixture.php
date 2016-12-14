@@ -3,9 +3,7 @@
 namespace GcoBundle\DataFixture;
 
 use GcoBundle\Entity\Technology;
-use Symfony\Bridge\Doctrine;
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Doctrine\DBAL\DriverManager;
 
 /**
  * Class TechnologyDataFixture
