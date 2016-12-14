@@ -1,0 +1,8 @@
+GcoBundle\Entity\CoreTechnology:
+    properties:            
+        technology:
+            - GcoBundle\Validators\Constraints\CoreTechnologyExists: ~
+            - NotBlank: 
+                message: Invalid Core Technology Name 
+               
+       

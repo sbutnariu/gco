@@ -1,0 +1,7 @@
+services:
+    gco.core_technology.technology_exists:
+        class: 'GcoBundle\Validators\Constraints\CoreTechnologyExistsValidator'
+        arguments:
+            - '@gco.core_technology.service'
+        tags:
+            - { name: validator.constraint_validator }

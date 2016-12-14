@@ -13,7 +13,7 @@ services:
         class: 'GcoBundle\DataFixture\UserDataFixture'
         arguments:
           - '@doctrine'
-          
+
     gco.core_technology.controller:
         class: 'GcoBundle\Controller\CoreTechnologyController'
         arguments:
@@ -23,8 +23,9 @@ services:
         class: 'GcoBundle\Service\CoreTechnologyService'
         arguments:
             - '@gco.core_technology.data_fixture'
+            - '@validator'
             
     gco.core_technology.data_fixture:
         class: 'GcoBundle\DataFixture\CoreTechnologyDataFixture'
         arguments:
-            - '@doctrine'
+            - '@doctrine.orm.entity_manager'

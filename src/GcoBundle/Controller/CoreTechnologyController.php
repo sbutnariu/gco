@@ -1,31 +1,36 @@
 <?php
 namespace GcoBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use GcoBundle\Service\CoreTechnologyService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use GcoBundle\Service\CoreTechnologyService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Validator\Constraints;
+use GcoBundle\Exceptions\InvalidParameterException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+use GcoBundle\Entity\CoreTechnology;
 
-use Symfony\Component\Validator\Validation;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\Route;
 
 
-/**
- * Core Technology Controller
- */
 
-class CoreTechnologyController  extends Controller{ 
-    
+class CoreTechnologyController  extends Controller{
+
     /** @var coreTechnologyService */
     private $coreTechnologyService;
-    
+
     /**
      * @param CoreTechnologyService $coreTechnologyService
      */
     public function __construct(CoreTechnologyService $coreTechnologyService)
     {
         $this->coreTechnologyService = $coreTechnologyService;
+
+
     }
 
     /**
@@ -33,29 +38,40 @@ class CoreTechnologyController  extends Controller{
      * @param Request $request
      * @return Response
      */
-    public function addCoreTechnologyAction(Request $request)
+    public function addAction(Request $request)
     {
-        $content = $request->getContent();        
-        $params = json_decode($content, true);
-        $coreTechnologyName = $params['name'];
-        
-        // check if technology name is not empty
-        $validator = Validation::createValidator();        
-        $errors = $validator->validate($coreTechnologyName, array(new NotBlank()));
-        
-        if (count($errors) > 0) {
-           $errorsString = (string) $errors;
-            return new Response($errorsString,Response::HTTP_BAD_REQUEST);
-        }
-        
+
+       $coreTechnology = $this->createCoreTechnology($request);
+       //$this->getTechnologyRoute();exit;
         try{
-            $this->coreTechnologyService->addCoreTechnology($coreTechnologyName);
-            return new Response('Core technology "'.$coreTechnologyName.'" inserted ', Response::HTTP_CREATED);
+            $this->coreTechnologyService->addCoreTechnology($coreTechnology);
+            return new Response("/technology/core/".$coreTechnology->getId(), Response::HTTP_CREATED);// to do: return get core technology route
         }
-        catch (CoreTechnologyAlreadyExistsException $ex){
-            return new Response('Technology'.$coreTechnologyName.' already in datebase', Response::HTTP_BAD_REQUEST);
+        catch (CoreTechnologyExists $ex ){
+            throw new AlreadyExistException($ex->getMessage(),$ex);
         }
-        
-       
+        catch (InvalidParameterException $ex){
+            throw new BadRequestHttpException($ex->getMessage(),$ex);
+        }
+
+
+       return new Response('', Response::HTTP_NO_CONTENT);
+    }
+
+    public static function createCoreTechnology($request){
+        $coreTechnology = new CoreTechnology();
+        $content = $request->getContent();
+        $params = json_decode($content, true);
+        $coreTechnology->setTechnology($params['name']);
+
+        return $coreTechnology;
+    }
+
+    public function getTechnologyRoute(){
+        // inject router in controller
+       // $route = new Route('/foo', array('controller' => 'MyController'));
+
+        // var_dump($this->get('router')->getRouteCollection());
+
     }
 }
