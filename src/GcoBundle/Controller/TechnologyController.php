@@ -84,10 +84,11 @@ class TechnologyController
         {
             throw new NotFoundHttpException($e->getMessage());
         }
+        /*
         catch (ExistsAlreadyException $e)
         {
             throw new ConflictHttpException($e->getMessage());
-        }
+        }*/
         $jsonContent = $this->serializer->serialize($technology->getId(), JsonEncoder::FORMAT);
         return new Response(null, Response::HTTP_CREATED, array("ETag"=>$jsonContent));
     }
