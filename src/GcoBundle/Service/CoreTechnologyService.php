@@ -33,6 +33,8 @@ class CoreTechnologyService
     public function getTechnology($id)
     {
         $technology = new CoreTechnology();
+        if(!is_numeric($id))
+            return null;
         $technology->setTechnology('Ana');
         return $technology;
     }

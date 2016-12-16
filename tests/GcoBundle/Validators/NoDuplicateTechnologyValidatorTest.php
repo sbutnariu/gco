@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\GcoBundle\Validators\NoDuplicateTechnologyValidatorTest;
+namespace Tests\GcoBundle\Validators;
 use GcoBundle\Entity\Technology;
 use GcoBundle\Validators\NoDuplicateTechnology;
 use GcoBundle\Validators\NoDuplicateTechnologyValidator;

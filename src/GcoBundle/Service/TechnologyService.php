@@ -93,7 +93,6 @@ class TechnologyService
         {
                     $constraint = get_class($error->getConstraint());
                     $exception = $this->exceptions[$constraint];
-                    var_dump($exception);
                     throw new $exception();
         }
         return $this->dataFixture->addTechnology($newTechnology);

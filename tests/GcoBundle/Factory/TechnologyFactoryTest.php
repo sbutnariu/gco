@@ -1,5 +1,5 @@
 <?php
-namespace Tests\GcoBundle\Factory\TechnologyFactoryTest;
+namespace Tests\GcoBundle\Factory;
 use GcoBundle\Entity\Technology;
 use GcoBundle\Factory\TechnologyFactory;
 

@@ -48,19 +48,12 @@ services:
               - '@gco.technology.df'
               - '@validator'
 
-    gco.exception_transformer.resolver:
-            class: GcoBundle\ExceptionTransformer\ExceptionMappingResolver
-
     gco.exception_transformer.http_exception_transformer:
         class: GcoBundle\ExceptionTransformer\HttpExceptionTransformer
         arguments : [ '%gco_exception_mapping.shortcuts%' ]
         calls :
             - [ "addMap" , [ '%gco_exception_mapping.exception_map%' ] ]
-        tags:
-            - { name: gco.exception.transformer, namespace_scope: "" }
 
     gco.exception_transformer.http_exception_listener:
         class: GcoBundle\ExceptionTransformer\ExceptionTransformerListener
-        arguments: [ "@gco.exception_transformer.resolver" ]
-        tags:
-            - { name : kernel.event_subscriber }
+        arguments: [ "@gco.exception_transformer.http_exception_transformer" ]

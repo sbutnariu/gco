@@ -1,8 +1,8 @@
 <?php
-namespace GcoBundle\ExceptionTransformer\HttpExceptionTransformer;
+namespace GcoBundle\ExceptionTransformer;
 
 
-class HttpExceptionTransformer implements ExceptionTransformerInterface
+class HttpExceptionTransformer
 {
 
 

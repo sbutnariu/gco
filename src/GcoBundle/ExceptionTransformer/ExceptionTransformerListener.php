@@ -1,7 +1,7 @@
 <?php
-namespace GcoBundle\ExceptionTransformer\ExceptionTransformerListener;
+namespace GcoBundle\ExceptionTransformer;
 
-use GcoBundle\ExceptionTransformer\ExceptionMappingResolver;
+use GcoBundle\ExceptionTransformer\HttpExceptionTransformer;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
@@ -12,14 +12,14 @@ class ExceptionTransformerListener implements EventSubscriberInterface
 {
 
     /**
-     * @var ExceptionMappingResolver
+     * @var HttpExceptionTransformer
      */
-    private $exceptionMappingResolver;
+    private $exceptionTransformer;
 
 
-    public function __construct(ExceptionMappingResolver $exceptionMappingResolver)
+    public function __construct(HttpExceptionTransformer $exceptionTransformer)
     {
-        $this->exceptionMappingResolver = $exceptionMappingResolver;
+        $this->exceptionTransformer = $exceptionTransformer;
     }
 
     /**
@@ -45,7 +45,7 @@ class ExceptionTransformerListener implements EventSubscriberInterface
 
         $ex = $event->getException();
         try {
-            $this->exceptionMappingResolver->resolve($ex);
+            $this->exceptionTransformer->transform($ex);
         } catch (\Exception $e) {
             $event->setException($e);
         }

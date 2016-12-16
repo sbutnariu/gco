@@ -49,14 +49,8 @@ class TechnologyController
      */
     public function getTechnologyAction(Request $request, $id)
     {
-        try
-        {
-            $technology = $this->service->getTechnology($id);
-        }
-        catch (NotFoundException $e)
-        {
-            throw new NotFoundHttpException($e->getMessage(), $e);
-        }
+
+        $technology = $this->service->getTechnology($id);
         $jsonContent = $this->serializer->serialize($technology, JsonEncoder::FORMAT);
 
         return new Response($jsonContent, 200);
@@ -76,19 +70,8 @@ class TechnologyController
                     'technologyName' => $request->get("technology_name")
                 )
         );
-        try
-        {
-            $technology = $this->service->addTechnology($newTechnology);
-        }
-        catch (NotFoundException $e)
-        {
-            throw new NotFoundHttpException($e->getMessage());
-        }
-        /*
-        catch (ExistsAlreadyException $e)
-        {
-            throw new ConflictHttpException($e->getMessage());
-        }*/
+
+        $technology = $this->service->addTechnology($newTechnology);
         $jsonContent = $this->serializer->serialize($technology->getId(), JsonEncoder::FORMAT);
         return new Response(null, Response::HTTP_CREATED, array("ETag"=>$jsonContent));
     }

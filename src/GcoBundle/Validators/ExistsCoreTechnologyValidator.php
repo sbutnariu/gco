@@ -23,7 +23,7 @@ class ExistsCoreTechnologyValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        $coreId = $value->getId();
+        $coreId = $value->getCoreId();
         $coreTechnology = $this->coreTechnologyService->getTechnology($coreId);
 
         if (is_null($coreTechnology)) {
