@@ -81,4 +81,3 @@ class Technology
         return $this->technology;
     }
 }
-

@@ -4,12 +4,35 @@ services:
         arguments:
           - '@gco.user.df'
           - '@serializer'
-#          - @gco.user.service
-#    gco.user.service:
-#        class: 'GcoBundle\Service\UserService'
-#        arguments:
-#          - gco.user.orm
+          - '@gco.level.service'
+          - '@gco.level.df'
+          
+          
+    gco.level.controller:
+        class: 'GcoBundle\Controller\LevelController'
+        arguments:
+          - '@gco.level.service'
+          - '@gco.factory.level'
+          
+    gco.level.service:
+        class: 'GcoBundle\Service\LevelService'
+        arguments:
+          - '@gco.level.df'
+          
+    gco.level.repository:
+        class: 'GcoBundle\Repository\LevelRepository'
+        arguments:
+          - '@doctrine'
+          
     gco.user.df:
         class: 'GcoBundle\DataFixture\UserDataFixture'
         arguments:
           - '@doctrine'
+          
+    gco.level.df:
+        class: 'GcoBundle\DataFixture\LevelDataFixture'
+        arguments:
+          - '@doctrine'
+          
+    gco.factory.level:
+        class: 'GcoBundle\Factory\LevelFactory'

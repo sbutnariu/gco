@@ -18,7 +18,7 @@ class Level
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
@@ -67,3 +67,4 @@ class Level
         return $this->name;
     }
 }
+

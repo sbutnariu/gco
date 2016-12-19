@@ -3,9 +3,9 @@
 namespace GcoBundle\Entity;
 
 /**
- * UserSkill
+ * TechValidator
  */
-class UserSkill
+class TechValidator
 {
     /**
      * @var integer
@@ -20,7 +20,7 @@ class UserSkill
     /**
      * @var integer
      */
-    private $levelId;
+    private $agencyId;
 
 
     /**
@@ -28,7 +28,7 @@ class UserSkill
      *
      * @param integer $userId
      *
-     * @return UserSkill
+     * @return TechValidator
      */
     public function setUserId($userId)
     {
@@ -52,7 +52,7 @@ class UserSkill
      *
      * @param integer $technologyId
      *
-     * @return UserSkill
+     * @return TechValidator
      */
     public function setTechnologyId($technologyId)
     {
@@ -72,26 +72,27 @@ class UserSkill
     }
 
     /**
-     * Set levelId
+     * Set agencyId
      *
-     * @param integer $levelId
+     * @param integer $agencyId
      *
-     * @return UserSkill
+     * @return TechValidator
      */
-    public function setLevelId($levelId)
+    public function setAgencyId($agencyId)
     {
-        $this->levelId = $levelId;
+        $this->agencyId = $agencyId;
 
         return $this;
     }
 
     /**
-     * Get levelId
+     * Get agencyId
      *
      * @return integer
      */
-    public function getLevelId()
+    public function getAgencyId()
     {
-        return $this->levelId;
+        return $this->agencyId;
     }
 }
+
