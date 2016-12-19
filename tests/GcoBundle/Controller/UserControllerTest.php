@@ -25,4 +25,5 @@ class UserControllerTest extends \PHPUnit_Framework_TestCase
         $actualResponse = $ctrl->getUserAction($request, 1);
         $this->assertEquals(200, $actualResponse->getStatusCode());
     }
+    
 }

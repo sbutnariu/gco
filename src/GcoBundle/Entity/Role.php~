@@ -3,9 +3,9 @@
 namespace GcoBundle\Entity;
 
 /**
- * CoreTechnology
+ * Role
  */
-class CoreTechnology
+class Role
 {
     /**
      * @var integer
@@ -15,7 +15,7 @@ class CoreTechnology
     /**
      * @var string
      */
-    private $technology;
+    private $role;
 
 
     /**
@@ -29,26 +29,27 @@ class CoreTechnology
     }
 
     /**
-     * Set technology
+     * Set role
      *
-     * @param string $technology
+     * @param string $role
      *
-     * @return CoreTechnology
+     * @return Role
      */
-    public function setTechnology($technology)
+    public function setRole($role)
     {
-        $this->technology = $technology;
+        $this->role = $role;
 
         return $this;
     }
 
     /**
-     * Get technology
+     * Get role
      *
      * @return string
      */
-    public function getTechnology()
+    public function getRole()
     {
-        return $this->technology;
+        return $this->role;
     }
 }
+

@@ -20,7 +20,7 @@ if ('dev' == $env) {
     Debug::enable();
 }
 
-$kernel = new AppKernel($env, false);
+$kernel = new AppKernel($env, true);
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);
 

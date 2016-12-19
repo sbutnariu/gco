@@ -3,14 +3,19 @@
 namespace GcoBundle\Entity;
 
 /**
- * CoreTechnology
+ * Technology
  */
-class CoreTechnology
+class Technology
 {
     /**
      * @var integer
      */
     private $id;
+
+    /**
+     * @var integer
+     */
+    private $coreId;
 
     /**
      * @var string
@@ -29,11 +34,35 @@ class CoreTechnology
     }
 
     /**
+     * Set coreId
+     *
+     * @param integer $coreId
+     *
+     * @return Technology
+     */
+    public function setCoreId($coreId)
+    {
+        $this->coreId = $coreId;
+
+        return $this;
+    }
+
+    /**
+     * Get coreId
+     *
+     * @return integer
+     */
+    public function getCoreId()
+    {
+        return $this->coreId;
+    }
+
+    /**
      * Set technology
      *
      * @param string $technology
      *
-     * @return CoreTechnology
+     * @return Technology
      */
     public function setTechnology($technology)
     {
@@ -52,3 +81,4 @@ class CoreTechnology
         return $this->technology;
     }
 }
+
