@@ -29,11 +29,4 @@ class UserController
 
         return new Response($jsonContent, 200);
     }
-    
-    
-    
-    public function homeAction()
-    {
-        return new Response('Bonjour');
-    }
 }

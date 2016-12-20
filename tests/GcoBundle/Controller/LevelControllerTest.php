@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 class LevelControllerTest extends \PHPUnit_Framework_TestCase
 {
     
-    public function testaddLevelAction()
+    public function testAddLevelAction()
     {
         
         $entityMock = $this->getMockBuilder('GcoBundle\Entity\Level')
@@ -21,6 +21,7 @@ class LevelControllerTest extends \PHPUnit_Framework_TestCase
         
         $factoryMock = $this->getMockBuilder('GcoBundle\Factory\LevelFactory')
                 ->getMock();
+        
         $factoryMock->expects($this->once())
                 ->method('generateLevel')
                 ->willReturn($entityMock);
@@ -33,9 +34,9 @@ class LevelControllerTest extends \PHPUnit_Framework_TestCase
         
         $request = new Request(array(), array(), array(), array(), array(), array(), json_encode(array()));
         
-        $testResponse = $ctrl->addLevelAction($request);
+        $actualResponse = $ctrl->addLevelAction($request);
         
-        $this->assertEquals(204,$testResponse->getStatusCode());
+        $this->assertEquals(204,$actualResponse->getStatusCode());
     }
             
 }

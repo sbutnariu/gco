@@ -19,7 +19,6 @@ class LevelFactory
             $newLevel->setName($level['label']);
         }
         
-        
         return $newLevel;
     }
     
