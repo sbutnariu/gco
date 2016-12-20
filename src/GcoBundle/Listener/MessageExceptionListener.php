@@ -5,7 +5,8 @@ namespace GcoBundle\Listener;
 use GcoBundle\Exceptions\ErrorCodeInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
-use GcoBundle\Exceptions\NotFoundException;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\HttpFoundation\Response;
 class MessageExceptionListener
 {
     /**
@@ -15,21 +16,31 @@ class MessageExceptionListener
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
-        $previous = $exception->getPrevious();
-        if ($previous instanceof  ErrorCodeInterface) {
-            $message = $previous->getMessage();
-            $code = $previous->getErrorCode();
-        } else {
-            $message = NotFoundException::MESSAGE;
-            $code = NotFoundException::INVALID_ROUTE_NAME;
+        $statusCode = null;
+        if(method_exists('getStatusCode', $exception)){
+            $statusCode = $exception->getStatusCode();
         }
-
+        if ($exception instanceof HttpExceptionInterface) {
+            $previousException = $exception->getPrevious();
+            if ($previousException instanceof ErrorCodeInterface) {
+                $code   = $previousException->getErrorCode();
+                $message = $previousException->getMessage();
+            } else {
+                $statusText = Response::$statusTexts[$exception->getStatusCode()];
+                $code = strtoupper(str_replace(' ', '_', $statusText));
+                $message = $exception->getMessage();
+            }
+        } else {
+            $code = 'INTERNAL_ERROR';
+            $message = $exception->getMessage();
+            $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+        }
         $responseData = [
             'error' => [
                 'code' => $code,
                 'message' => $message
             ]
         ];
-        $event->setResponse(new JsonResponse($responseData, $exception->getStatusCode()));
+        $event->setResponse(new JsonResponse($responseData, $statusCode));
     }
 }
