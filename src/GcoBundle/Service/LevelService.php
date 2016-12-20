@@ -19,7 +19,7 @@ class LevelService
     
     public function addLevel(Level $levelObject)
     {
-        $this->dataFixture->addLevel($levelObject);
+        return $this->dataFixture->addLevel($levelObject);
     }
     
 

@@ -22,7 +22,7 @@ class LevelDataFixture
     {
         
         $em = $this->doctrine->getManager();
-        
+ 
         $entityExist = $em->getRepository('GcoBundle:Level')->find($level->getId());
         
         
@@ -35,11 +35,14 @@ class LevelDataFixture
             $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
             
             $em->flush();
+            return $level;
             
         }
                
         $em->merge($level);
         $em->flush();
+        
+        return $level;
         
     }
     
