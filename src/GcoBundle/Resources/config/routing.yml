@@ -1,21 +1,5 @@
-gco_get_user:
-    path: /user/{id}
-    defaults: {_controller: 'gco.user.controller:getUserAction'}
-    methods: [GET]
-    
-    
 gco_add_level:
     path: /level
     defaults: {_controller: 'gco.level.controller:addLevelAction'}
     methods: [PUT]
     
-gco_home_level:
-    path: /home
-    defaults: {_controller: 'gco.level.controller:homeAction'}
-    methods: [PUT]
-    
-    
-gco_home:
-    path: /
-    defaults: {_controller: 'gco.user.controller:homeAction'}
-    methods: [GET]
