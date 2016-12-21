@@ -25,7 +25,7 @@ class CoreTechnologyServiceTest extends \PHPUnit_Framework_TestCase {
         $request = $this->createRequest();
         $coreTechnologyEntity = CoreTechnologyController::createCoreTechnology($request);
         $dataFixtureMock = $this->getMockBuilder('GcoBundle\DataFixture\CoreTechnologyDataFixture')->disableOriginalConstructor()->getMock();
-        $validatorMock = $this->getMockBuilder('GcoBundle\Exceptions\InvalidParameterException')->disableOriginalConstructor()->getMock();
+        $validatorMock = $this->getMockBuilder('Symfony\Component\Validator\Validator\ValidatorInterfaceS')->disableOriginalConstructor()->getMock();
 
 
          $validatorMock->expects($coreTechnologyEntity)

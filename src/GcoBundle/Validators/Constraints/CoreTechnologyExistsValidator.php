@@ -32,7 +32,7 @@ class CoreTechnologyExistsValidator extends ConstraintValidator
         }*/
 
         if (empty($value)) {
-            throw new UnexpectedTypeException($value, '');
+            throw new InvalidParameterException($value, '');
         }
 
         $exists = $this->coreTechnologyService->getCoreTechnologyByName($value);
