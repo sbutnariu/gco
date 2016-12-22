@@ -7,7 +7,6 @@ use GcoBundle\Entity\Level;
 
 class LevelDataFixtureTest extends \PHPUnit_Framework_TestCase
 {
-    
     public function testAddLevel()
     {
         $entityMock = $this->getMockBuilder('GcoBundle\Entity\Level')
@@ -18,13 +17,17 @@ class LevelDataFixtureTest extends \PHPUnit_Framework_TestCase
                 ->disableOriginalConstructor()
                 ->getMock();
         
+        $repoMock->expects($this->once())
+                ->method('find')
+                ->will($this->returnValue($entityMock));
+        
         $emMock = $this->getMockBuilder('Doctrine\ORM\EntityManager')
                 ->disableOriginalConstructor()
                 ->getMock();
         
-        $repoMock->expects($this->once())
-                ->method('find')
-                ->will($this->returnValue($entityMock));
+        $emMock->expects($this->once())
+                ->method('getRepository')
+                ->will($this->returnValue($repoMock));
         
         $doctrineMock = $this->getMockBuilder('Doctrine\Bundle\DoctrineBundle\Registry')
                 ->disableOriginalConstructor()
@@ -34,11 +37,6 @@ class LevelDataFixtureTest extends \PHPUnit_Framework_TestCase
                 ->method('getManager')
                 ->will($this->returnValue($emMock));
         
-        $emMock->expects($this->once())
-                ->method('getRepository')
-                ->will($this->returnValue($repoMock));
-        
-        
         $dataFixture = new LevelDataFixture($doctrineMock);
         
         $expectedResponse = new Level();
@@ -46,8 +44,5 @@ class LevelDataFixtureTest extends \PHPUnit_Framework_TestCase
         $actualResponse = $dataFixture->addLevel($entityMock);
         
         $this->assertInstanceOf(get_class($expectedResponse), $actualResponse);
-        
     }
-    
 }
-

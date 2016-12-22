@@ -4,26 +4,36 @@ namespace GcoBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use GcoBundle\DataFixture\UserDataFixture;
 use GcoBundle\Service\LevelService;
 use GcoBundle\Factory\LevelFactory;
 
 class LevelController
 {
-
+    /**
+     * @var LevelService
+     */
     private $levelService;
+    /**
+     * @var LevelFactory
+     */
     private $levelFactory;
 
-
+    /**
+     * LevelController constructor
+     * @param LevelService $levelService
+     * @param LevelFactory $levelFactory
+     */
     public function __construct(LevelService $levelService, LevelFactory $levelFactory)
     {
         $this->levelService = $levelService;
         $this->levelFactory = $levelFactory;
     }
     
-    
+    /**
+     * We get the content of the Request, we create a Level object with this one, and we send the Level to the LevelService method
+     * @param Request $request
+     * @return Response, 204 if everything went well
+     */
     public function addLevelAction(Request $request)
     {
         $contentData = json_decode($request->getContent(),true);
@@ -34,5 +44,4 @@ class LevelController
         
         return new Response ("",Response::HTTP_NO_CONTENT);
     }
- 
 }

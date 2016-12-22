@@ -5,13 +5,10 @@ namespace Tests\GcoBundle\Entity;
 use GcoBundle\Controller\LevelController;
 use Symfony\Component\HttpFoundation\Request;
 
-
 class LevelControllerTest extends \PHPUnit_Framework_TestCase
 {
-    
     public function testAddLevelAction()
     {
-        
         $entityMock = $this->getMockBuilder('GcoBundle\Entity\Level')
                 ->getMock();
              
@@ -38,6 +35,4 @@ class LevelControllerTest extends \PHPUnit_Framework_TestCase
         
         $this->assertEquals(204,$actualResponse->getStatusCode());
     }
-            
 }
-
