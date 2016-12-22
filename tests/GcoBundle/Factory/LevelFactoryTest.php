@@ -7,7 +7,6 @@ use GcoBundle\Entity\Level;
 
 class LevelFactoryTest extends \PHPUnit_Framework_TestCase
 {
-    
     public function testGenerateLevel()
     {
         $newLevel = array(
@@ -25,6 +24,4 @@ class LevelFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedResponse->getId(), $actualResponse->getId());
         $this->assertEquals($expectedResponse->getName(), $actualResponse->getName());
     }
-    
 }
-

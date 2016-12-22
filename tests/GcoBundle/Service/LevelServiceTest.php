@@ -7,10 +7,8 @@ use GcoBundle\Entity\Level;
 
 class LevelServiceTest extends \PHPUnit_Framework_TestCase
 {
-    
     public function testAddLevel()
     {
-        
         $dataFxMock = $this->getMockBuilder('GcoBundle\DataFixture\LevelDataFixture')
                 ->disableOriginalConstructor()
                 ->getMock();
@@ -23,11 +21,8 @@ class LevelServiceTest extends \PHPUnit_Framework_TestCase
         
         $expectedResponse = new Level();
         
-        $actualResponse = $service->addLevel(new Level());
+        $actualResponse = $service->addLevel($expectedResponse);
         
         $this->assertInstanceOf(get_class($expectedResponse), $actualResponse);
-        
     }
-    
 }
-

@@ -2,4 +2,3 @@ gco_add_level:
     path: /level
     defaults: {_controller: 'gco.level.controller:addLevelAction'}
     methods: [PUT]
-    
