@@ -16,7 +16,7 @@ class MessageExceptionListener
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
-        $statusCode = null;
+        $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
         if(method_exists('getStatusCode', $exception)){
             $statusCode = $exception->getStatusCode();
         }
@@ -33,7 +33,6 @@ class MessageExceptionListener
         } else {
             $code = 'INTERNAL_ERROR';
             $message = $exception->getMessage();
-            $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
         }
         $responseData = [
             'error' => [
