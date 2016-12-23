@@ -2,17 +2,26 @@ services:
     gco.user.controller:
         class: 'GcoBundle\Controller\UserController'
         arguments:
-          - '@gco.user.df'
+          - '@gco.user.service'
           - '@serializer'
-#          - @gco.user.service
-#    gco.user.service:
-#        class: 'GcoBundle\Service\UserService'
-#        arguments:
-#          - gco.user.orm
+    gco.user.service:
+        class: 'GcoBundle\Service\UserService'
+        arguments:
+          - '@gco.user.df'
     gco.user.df:
         class: 'GcoBundle\DataFixture\UserDataFixture'
         arguments:
           - '@doctrine'
+    gco.exception_transformer.http_exception_transformer:
+        class: GcoBundle\ExceptionTransformer\HttpExceptionTransformer
+        arguments : [ '%gco_exception_mapping.shortcuts%' ]
+        calls :
+            - [ "addMap" , [ '%gco_exception_mapping.exception_map%' ] ]
+    gco.exception_transformer.http_exception_listener:
+        class: GcoBundle\ExceptionTransformer\ExceptionTransformerListener
+        arguments: [ "@gco.exception_transformer.http_exception_transformer" ]
+        tags:
+            - { name: kernel.event_subscriber }          - '@doctrine'
     message.listener:
         class: GcoBundle\Listener\MessageExceptionListener
         tags:
