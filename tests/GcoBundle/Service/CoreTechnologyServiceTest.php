@@ -25,14 +25,14 @@ class CoreTechnologyServiceTest extends \PHPUnit_Framework_TestCase {
         $request = $this->createRequest();
         $coreTechnologyEntity = CoreTechnologyController::createCoreTechnology($request);
         $dataFixtureMock = $this->getMockBuilder('GcoBundle\DataFixture\CoreTechnologyDataFixture')->disableOriginalConstructor()->getMock();
-        $validatorMock = $this->getMockBuilder('Symfony\Component\Validator\Validator\ValidatorInterfaceS')->disableOriginalConstructor()->getMock();
+        $validatorMock = $this->getMockBuilder('Symfony\Component\Validator\Validator\ValidatorInterface')->disableOriginalConstructor()->getMock();
 
 
-         $validatorMock->expects($coreTechnologyEntity)
+         $validatorMock->expects($this->any())
                         ->method('validate')
                         ->shouldBeCalledTimes(1)->willReturn(201);
 
-          $dataFixtureMock->expects($coreTechnologyEntity)
+          $dataFixtureMock->expects($this->any())
                         ->method('saveCoreTechnology')
                         ->shouldBeCalledTimes(1)->willReturn(201);
 

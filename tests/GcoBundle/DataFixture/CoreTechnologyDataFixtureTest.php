@@ -1,8 +1,10 @@
 <?php
 use Doctrine\ORM\EntityManager;
 use GcoBundle\Entity\CoreTechnology;
+use Symfony\Component\HttpFoundation\Request;
+use GcoBundle\Controller\CoreTechnologyController;
 
-class CoreTechnologyDataFixtureTest {
+class CoreTechnologyDataFixtureTest extends \PHPUnit_Framework_TestCase {
 
 
     public function createRequest(){
@@ -22,11 +24,11 @@ class CoreTechnologyDataFixtureTest {
         $coreTechnologyEntity = CoreTechnologyController::createCoreTechnology($request);
 
         $emMock = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
-        $emMock->expects($coreTechnologyEntity)
+        $emMock->expects($this->any())
             ->method('persist')
             ->shouldBeCalledTimes(1);
 
-        $emMock->expects($coreTechnologyEntity)
+        $emMock->expects($this->any())
             ->method('flush')
             ->shouldBeCalledTimes(1);
 

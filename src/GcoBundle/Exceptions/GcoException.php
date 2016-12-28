@@ -8,12 +8,12 @@ abstract class GcoException extends \Exception
     
     /**
      * Constructor
-     * @param string $errorCode the specific error code
      * @param string $message the message to be shown
+     * @param string $errorCode the specific error code
      */
-    public function __construct($errorCode, $message)
+    public function __construct($message, $errorCode)
     {
-        parent::__construct($message, $code);
+        parent::__construct($message, $errorCode);
         
         $this->errorCode = $errorCode;
     }

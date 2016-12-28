@@ -1,6 +1,7 @@
 <?php
 namespace GcoBundle\Controller;
 
+use GcoBundle\Exceptions\CoreTechnologyAlreadyExistsException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use GcoBundle\Service\CoreTechnologyService;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,8 +30,6 @@ class CoreTechnologyController  extends Controller{
     public function __construct(CoreTechnologyService $coreTechnologyService)
     {
         $this->coreTechnologyService = $coreTechnologyService;
-
-
     }
 
     /**
@@ -39,21 +38,22 @@ class CoreTechnologyController  extends Controller{
      * @return Response
      */
     public function addAction(Request $request)
-    {
-
+    { //$this->getTechnologyRoute();exit;
+       // echo "mama";exit;
        $coreTechnology = $this->createCoreTechnology($request);
-       //$this->getTechnologyRoute();exit;
+
         try{
             $this->coreTechnologyService->addCoreTechnology($coreTechnology);
             return new Response("/technology/core/".$coreTechnology->getId(), Response::HTTP_CREATED);// to do: return get core technology route
         }
-        catch (CoreTechnologyExists $ex ){
-            throw new AlreadyExistException($ex->getMessage(),$ex);
+        catch (CoreTechnologyAlreadyExistsException $ex ){
+            echo "catch1";
+            throw new CoreTechnologyAlreadyExistsException($ex->getMessage(),$ex);
         }
         catch (InvalidParameterException $ex){
+            echo "catch2";
             throw new BadRequestHttpException($ex->getMessage(),$ex);
         }
-
 
        return new Response('', Response::HTTP_NO_CONTENT);
     }
@@ -71,7 +71,8 @@ class CoreTechnologyController  extends Controller{
         // inject router in controller
        // $route = new Route('/foo', array('controller' => 'MyController'));
 
-        // var_dump($this->get('router')->getRouteCollection());
+        $test = $this->get('router')->getRouteCollection();
+        echo $test;
 
     }
 }

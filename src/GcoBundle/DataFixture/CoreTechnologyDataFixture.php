@@ -40,8 +40,7 @@ class CoreTechnologyDataFixture{
         $statement->execute();
         $results = $statement->fetchAll();
 
-         $coreTechnology = new CoreTechnology();
-
+        $coreTechnology = new CoreTechnology();
         $coreTechnology->setTechnology($results);
 
         return $coreTechnology;
