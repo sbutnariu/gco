@@ -29,3 +29,7 @@ services:
         class: 'GcoBundle\DataFixture\CoreTechnologyDataFixture'
         arguments:
             - '@doctrine.orm.entity_manager'
+	message.listener:
+	        class: GcoBundle\Listener\MessageExceptionListener
+	        tags:
+	          - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

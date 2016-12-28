@@ -2,22 +2,31 @@
 
 namespace GcoBundle\Exceptions;
 
-abstract class GcoException extends \Exception
+
+abstract class GcoException extends \Exception implements ErrorCodeInterface
 {
-        private $errorCode;
-    
+    /**
+     * String code contains information about the Exception's cause
+     * Added as part of error standardization initiative
+     * Example: INVALID_SOME_PARAM
+     * @var string
+     */
+    private $errorCode;
+
     /**
      * Constructor
-     * @param string $message the message to be shown
-     * @param string $errorCode the specific error code
+     * @param string $errorCode
+     * @param string $message
+     * @param int $code
+     * @param \Exception $previous
      */
-    public function __construct($message, $errorCode)
+    public function __construct($errorCode, $message, $code = 0, $previous = null)
     {
-        parent::__construct($message, $errorCode);
-        
+        parent::__construct($message, $code, $previous);
+
         $this->errorCode = $errorCode;
     }
-    
+
     /**
      * @return string
      */
