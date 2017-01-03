@@ -6,3 +6,7 @@ gco_core_technology:
     path: /technology/core
     defaults: {_controller: 'gco.core_technology.controller:addAction'}
     methods: [POST]
+gco_get_core_technology_id:
+    path: /technology/core/{id}
+    defaults: {_controller: 'gco.core_technology.controller:getCoreTechnologyById'}
+    methods: [GET]

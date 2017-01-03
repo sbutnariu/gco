@@ -5,6 +5,8 @@ namespace GcoBundle\Service;
 use GcoBundle\DataFixture\CoreTechnologyDataFixture;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use GcoBundle\Entity\CoreTechnology;
+use GcoBundle\Exceptions\InvalidParameterException;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class CoreTechnologyService {
@@ -52,4 +54,19 @@ class CoreTechnologyService {
         return $coreTechnology;
     }
 
+    /**
+     * @param integer $id
+     * @return null|CoreTechnology
+     * @throws NotFoundException|WrongTypeException
+     */
+    public function getCoreTechnologyById($id)
+    {
+        $coreTechnology = $this->dataFixture->getCoreTechnologyById($id);
+
+        if($coreTechnology == null){
+            throw new InvalidParameterException("Core technology with id ". $id. " not found", Response::HTTP_BAD_REQUEST);
+        }
+        return $coreTechnology;
+
+    }
 }

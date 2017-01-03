@@ -38,6 +38,19 @@ class CoreTechnologyController extends Controller{
         return new Response($coreTechnologyRoute.'/'.$coreTechnology->getId(), Response::HTTP_CREATED);
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return Response
+     */
+    public function getCoreTechnologyById($id)
+    {
+        $coreTechnology = $this->coreTechnologyService->getCoreTechnologyById($id);
+        $params = json_encode($coreTechnology->getTechnology(), true);
+
+        return new Response($params, Response::HTTP_OK);
+    }
+
     public static function createCoreTechnology($request)
     {
         $coreTechnology = new CoreTechnology();

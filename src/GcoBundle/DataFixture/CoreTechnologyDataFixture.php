@@ -32,8 +32,8 @@ class CoreTechnologyDataFixture{
      * @param string $technologyName
      * @return null|CoreTechnology
      */
-    public function getCoreTechnologyByName($technologyName){
-
+    public function getCoreTechnologyByName($technologyName)
+    {
         $coreTechnology = null;
         $connection = $this->em->getConnection();
         $statement = $connection->prepare("SELECT * FROM core_technology WHERE technology = :technology");
@@ -47,5 +47,25 @@ class CoreTechnologyDataFixture{
         }
         return $coreTechnology;
 
+    }
+
+    /**
+     * @param int $id
+     * @return null|CoreTechnology
+     */
+    public function getCoreTechnologyById($id)
+    {
+        $coreTechnology = null;
+        $connection = $this->em->getConnection();
+        $statement = $connection->prepare("SELECT * FROM core_technology WHERE id = :id");
+        $statement->bindValue('id', $id);
+        $statement->execute();
+        $result = $statement->fetch();
+
+        if ($result) {
+            $coreTechnology = new CoreTechnology();
+            $coreTechnology->setTechnology($result);
+        }
+        return $coreTechnology;
     }
 }
