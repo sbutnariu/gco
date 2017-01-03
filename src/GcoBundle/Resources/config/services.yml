@@ -18,6 +18,7 @@ services:
         class: 'GcoBundle\Controller\CoreTechnologyController'
         arguments:
             - '@gco.core_technology.service'
+            - '@service_container'
             
     gco.core_technology.service:
         class: 'GcoBundle\Service\CoreTechnologyService'
@@ -29,7 +30,8 @@ services:
         class: 'GcoBundle\DataFixture\CoreTechnologyDataFixture'
         arguments:
             - '@doctrine.orm.entity_manager'
-	message.listener:
-	        class: GcoBundle\Listener\MessageExceptionListener
-	        tags:
-	          - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+    message.listener:
+        class: GcoBundle\Listener\MessageExceptionListener
+        tags:
+            - {name: kernel.event_listener, event: kernel.exception, method: onKernelException}

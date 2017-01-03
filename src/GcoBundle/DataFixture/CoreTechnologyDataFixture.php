@@ -34,15 +34,17 @@ class CoreTechnologyDataFixture{
      */
     public function getCoreTechnologyByName($technologyName){
 
+        $coreTechnology = null;
         $connection = $this->em->getConnection();
         $statement = $connection->prepare("SELECT * FROM core_technology WHERE technology = :technology");
         $statement->bindValue('technology', $technologyName);
         $statement->execute();
-        $results = $statement->fetchAll();
+        $result = $statement->fetch();
 
-        $coreTechnology = new CoreTechnology();
-        $coreTechnology->setTechnology($results);
-
+        if ($result) {
+            $coreTechnology = new CoreTechnology();
+            $coreTechnology->setTechnology($result);
+        }
         return $coreTechnology;
 
     }

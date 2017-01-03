@@ -4,8 +4,6 @@ namespace GcoBundle\Validators\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use GcoBundle\Exceptions\CoreTechnologyAlreadyExistsException;
 use GcoBundle\Service\CoreTechnologyService;
 use GcoBundle\Exceptions\InvalidParameterException;
@@ -31,14 +29,13 @@ class CoreTechnologyExistsValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (empty($value)) {
-            throw new InvalidParameterException($value, Response::HTTP_NO_CONTENT);
+            throw new InvalidParameterException("Empty value", Response::HTTP_BAD_REQUEST);
         }
 
         $coreTechnology = $this->coreTechnologyService->getCoreTechnologyByName($value);
 
-        if($coreTechnology->getTechnology()) {
-            //$this->context->addViolation($constraint->message);
-            throw new CoreTechnologyAlreadyExistsException("Already exists", Response::HTTP_NO_CONTENT);
+        if($coreTechnology) {
+            throw new CoreTechnologyAlreadyExistsException("Already exists", Response::HTTP_BAD_REQUEST);
         }
 
     }

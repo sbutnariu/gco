@@ -1,9 +1,9 @@
 <?php
 
 namespace GcoBundle\Exceptions;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
-
-abstract class GcoException extends \Exception implements ErrorCodeInterface
+abstract class GcoException extends \Exception implements ErrorCodeInterface, HttpExceptionInterface
 {
     /**
      * String code contains information about the Exception's cause
@@ -20,7 +20,7 @@ abstract class GcoException extends \Exception implements ErrorCodeInterface
      * @param int $code
      * @param \Exception $previous
      */
-    public function __construct($errorCode, $message, $code = 0, $previous = null)
+    public function __construct($message, $errorCode, $code = 0, $previous = null)
     {
         parent::__construct($message, $code, $previous);
 
@@ -34,4 +34,15 @@ abstract class GcoException extends \Exception implements ErrorCodeInterface
     {
         return $this->errorCode;
     }
+
+    /**
+     * Returns response headers.
+     *
+     * @return array Response headers
+     */
+    public function getHeaders()
+    {
+        // TODO: Implement getHeaders() method.
+    }
+
 }

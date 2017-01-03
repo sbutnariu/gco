@@ -2,13 +2,8 @@
 
 namespace GcoBundle\Service;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use GcoBundle\DataFixture\CoreTechnologyDataFixture;
-use GcoBundle\Exceptions\CoreTechnologyAlreadyExistsException;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use GcoBundle\Exceptions\InvalidParameterException;
 use GcoBundle\Entity\CoreTechnology;
 
 
@@ -37,7 +32,7 @@ class CoreTechnologyService {
 
     /**
      *
-     * @param  coreTechnologyName
+     * @param  $coreTechnology
      */
 
     public function addCoreTechnology(CoreTechnology $coreTechnology)
@@ -46,6 +41,11 @@ class CoreTechnologyService {
         $this->dataFixture->saveCoreTechnology($coreTechnology);
     }
 
+    /**
+     *
+     * @param  coreTechnologyName
+     * @return CoreTechnology
+     */
     public function getCoreTechnologyByName($coreTechnologyName)
     {
         $coreTechnology = $this->dataFixture->getCoreTechnologyByName($coreTechnologyName);

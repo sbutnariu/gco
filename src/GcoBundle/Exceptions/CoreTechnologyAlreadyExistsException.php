@@ -3,9 +3,9 @@ namespace GcoBundle\Exceptions;
 
 use GcoBundle\Exceptions\GcoException;
 
+
 class CoreTechnologyAlreadyExistsException extends GcoException
 {
-    private $errorCode;
     /**
      * Constructor
      * @param string $errorCode the specific error code
@@ -14,7 +14,12 @@ class CoreTechnologyAlreadyExistsException extends GcoException
     public function __construct($message, $errorCode)
     {
         parent::__construct($message, $errorCode);
-
-        $this->errorCode = $errorCode;
     }
+
+    public function getStatusCode()
+    {
+        return $this->getErrorCode();
+    }
+
+
 }
