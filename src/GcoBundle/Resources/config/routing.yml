@@ -2,3 +2,8 @@ gco_add_level:
     path: /level
     defaults: {_controller: 'gco.level.controller:addLevelAction'}
     methods: [PUT]
+    
+gco_get_user_skills:
+    path: /user/{id}/skills
+    defaults: {_controller: 'gco.UserSkill.controller:getUserSkillAction'}
+    methods: [GET]

@@ -7,12 +7,22 @@ services:
           - '@gco.level.service'
           - '@gco.level.df'
           
-          
     gco.level.controller:
         class: 'GcoBundle\Controller\LevelController'
         arguments:
           - '@gco.level.service'
           - '@gco.factory.level'
+          
+    gco.userSkill.controller:
+        class: 'GcoBundle\Controller\UserSkillController'
+        arguments:
+          - '@gco.userSkill.service'
+          - '@gco.normalize'
+          
+    gco.userSkill.service:
+        class: 'GcoBundle\Service\UserSkillService'
+        arguments:
+          - '@gco.userSkill.df'
           
     gco.level.service:
         class: 'GcoBundle\Service\LevelService'
@@ -29,14 +39,23 @@ services:
         arguments:
           - '@doctrine'
           
+    gco.userSkill.df:
+        class: 'GcoBundle\DataFixture\UserSkillDataFixture'
+        arguments:
+          - '@doctrine'
+          
     gco.level.df:
         class: 'GcoBundle\DataFixture\LevelDataFixture'
         arguments:
           - '@doctrine'
           
     gco.factory.level:
-        class: 'GcoBundle\Factory\LevelFactory'          - '@doctrine'
+        class: 'GcoBundle\Factory\LevelFactory'
+         
+    gco.normalize:
+        class: 'GcoBundle\Serializer\UserSkillSerializer'
+        
     message.listener:
         class: GcoBundle\Listener\MessageExceptionListener
         tags:
-          - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

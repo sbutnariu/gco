@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\GcoBundle\Entity;
+namespace Tests\GcoBundle\Controller;
 
 use GcoBundle\Controller\LevelController;
 use Symfony\Component\HttpFoundation\Request;
