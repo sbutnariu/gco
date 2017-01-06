@@ -38,7 +38,7 @@ class UserSkillDataFixture
         $userSkillEntity = $em->getRepository('GcoBundle:UserSkill')->findByuser_id($id);
         
         if(empty($userSkillEntity)) {
-            throw new NotFoundHttpException('No data found for this User');
+            throw new NotFoundHttpException("No data found for this User");
         }
         
         return $userSkillEntity;
