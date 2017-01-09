@@ -7,7 +7,7 @@ use GcoBundle\Service\UserSkillService;
 use GcoBundle\Serializer\UserSkillSerializer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use GcoBundle\Exception\IsNotNumericException;
+use GcoBundle\Exceptions\InvalidParametersException;
 
 class UserSkillController
 {
@@ -45,8 +45,8 @@ class UserSkillController
             $formattedList = $this->normalizer->normalize($skillList);
             return new Response($formattedList,Response::HTTP_OK);
        
-        } catch (IsNotNumericException $e) {
-            throw new BadRequestHttpException($e->getMessage(), $e);
+        } catch (InvalidParametersException $e) {
+            throw new BadRequestHttpException($e->getErrorCode(), $e);
         } catch (NotFoundHttpException $e) {
             throw new NotFoundHttpException($e->getMessage(), $e);
         }

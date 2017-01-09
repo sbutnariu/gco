@@ -4,7 +4,7 @@ namespace GcoBundle\DataFixture;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use GcoBundle\Exception\IsNotNumericException;
+use GcoBundle\Exceptions\InvalidParametersException;
 
 class UserSkillDataFixture
 {
@@ -31,7 +31,7 @@ class UserSkillDataFixture
     public function getUserSkill($id)
     {
         if(!is_numeric($id)) {
-            throw new IsNotNumericException();
+            throw new InvalidParametersException(InvalidParametersException::WRONG_DATA_TYPE, InvalidParametersException::MESSAGE);
         }
         
         $em = $this->doctrine->getManager();

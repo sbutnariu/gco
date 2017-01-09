@@ -1,8 +1,8 @@
 <?php
 
-namespace GcoBundle\Exception;
+namespace GcoBundle\Exceptions;
 
-class IsNotNumericException extends \Symfony\Component\HttpKernel\Exception\HttpException
+class IsNotNumericException extends GcoException
 {
     public function __construct($message = null, $code = 0)
     {
