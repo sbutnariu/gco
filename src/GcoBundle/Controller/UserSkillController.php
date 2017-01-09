@@ -8,6 +8,7 @@ use GcoBundle\Serializer\UserSkillSerializer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use GcoBundle\Exceptions\InvalidParametersException;
+use GcoBundle\Exceptions\NotFoundException;
 
 class UserSkillController
 {
@@ -33,7 +34,7 @@ class UserSkillController
     
     /**
      * The constructor take the user id in parameter then it will return the skills list or an exception
-     * @param type $id
+     * @param int $id
      * @return Response
      * @throws BadRequestHttpException
      * @throws NotFoundHttpException
@@ -47,8 +48,8 @@ class UserSkillController
        
         } catch (InvalidParametersException $e) {
             throw new BadRequestHttpException($e->getErrorCode(), $e);
-        } catch (NotFoundHttpException $e) {
-            throw new NotFoundHttpException($e->getMessage(), $e);
+        } catch (NotFoundException $e) {
+            throw new NotFoundHttpException($e->getErrorCode(), $e);
         }
     }
 }

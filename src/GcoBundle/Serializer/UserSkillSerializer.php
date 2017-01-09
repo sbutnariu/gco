@@ -12,7 +12,7 @@ class UserSkillSerializer implements NormalizerInterface
      * @param type $datas
      * @param type $format
      * @param array $context
-     * @return type
+     * @return json content
      */
     public function normalize($datas = array(), $format = null, array $context = array())
     {

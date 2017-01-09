@@ -38,8 +38,8 @@ class UserSkillControllerTest extends \PHPUnit_Framework_TestCase
     public function exceptionProvider()
     {
         return array(
-            'IsNotNumericException' => array('GcoBundle\Exception\IsNotNumericException', 400, 'p', 'Symfony\Component\HttpKernel\Exception\BadRequestHttpException'),
-            'NotFoundHttpException' => array('Symfony\Component\HttpKernel\Exception\NotFoundHttpException', 404, 0, 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException')
+            'IsNotNumericException' => array('GcoBundle\Exceptions\InvalidParametersException', 'WRONG_DATA_TYPE', 'p', 'Symfony\Component\HttpKernel\Exception\BadRequestHttpException'),
+            'NotFoundHttpException' => array('GcoBundle\Exceptions\NotFoundException', 'NO_DATA_FOUND', 0, 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException')
         );
     }
     
@@ -56,7 +56,7 @@ class UserSkillControllerTest extends \PHPUnit_Framework_TestCase
         
         $serviceMock->expects($this->once())
                 ->method('getUserSkill')
-                ->will($this->throwException(New $e));
+                ->will($this->throwException(New $e($statusCode,'test')));
         
         $normalizerMock = $this->getMockBuilder('GcoBundle\Serializer\UserSkillSerializer')
                 ->getMock();
@@ -68,7 +68,7 @@ class UserSkillControllerTest extends \PHPUnit_Framework_TestCase
         
         $actualResponse = $ctrl->getUserSkillAction($id);
         
-        $this->assertEquals($statusCode, $actualResponse->getStatusCode());
+        $this->assertEquals($statusCode, $actualResponse->getErrorCode());
     }
 }
 

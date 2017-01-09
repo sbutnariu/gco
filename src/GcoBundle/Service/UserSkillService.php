@@ -21,8 +21,8 @@ class UserSkillService
     
     /**
      * Get the User id and send it to the dataFixture which will return an object or an exception
-     * @param type $id
-     * @return type
+     * @param int $id
+     * @return $this->dataFixture->getUserSkill($id)
      */
     public function getUserSkill($id)
     {
