@@ -2,16 +2,43 @@ services:
     gco.user.controller:
         class: 'GcoBundle\Controller\UserController'
         arguments:
-            - '@gco.user.service'
-            - '@serializer'
-    gco.user.service:
-        class: 'GcoBundle\Service\UserService'
+          - '@gco.user.df'
+          - '@serializer'
+          - '@gco.level.service'
+          - '@gco.level.df'
+          
+    gco.userSkill.controller:
+        class: 'GcoBundle\Controller\UserSkillController'
         arguments:
-            - '@gco.user.df'
+          - '@gco.userSkill.service'
+          - '@gco.normalize'
+          
+    gco.userSkill.service:
+        class: 'GcoBundle\Service\UserSkillService'
+        arguments:
+          - '@gco.userSkill.df'
+                
+    gco.level.repository:
+        class: 'GcoBundle\Repository\LevelRepository'
+        arguments:
+          - '@doctrine'
+          
     gco.user.df:
         class: 'GcoBundle\DataFixture\UserDataFixture'
         arguments:
-            - '@doctrine'
+          
+    gco.userSkill.df:
+        class: 'GcoBundle\DataFixture\UserSkillDataFixture'
+        arguments:
+          - '@doctrine'
+                 
+    gco.normalize:
+        class: 'GcoBundle\Serializer\UserSkillSerializer'
+        
+    message.listener:
+        class: GcoBundle\Listener\MessageExceptionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
     gco.exception_transformer.http_exception_transformer:
         class: GcoBundle\ExceptionTransformer\HttpExceptionTransformer
         arguments : [ '%gco_exception_mapping.shortcuts%' ]

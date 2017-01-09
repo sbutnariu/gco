@@ -1,4 +1,4 @@
-gco_get_user:
-    path: /user/{id}
-    defaults: {_controller: 'gco.user.controller:getUserAction'}
+gco_get_user_skills:
+    path: /user/{id}/skills
+    defaults: {_controller: 'gco.UserSkill.controller:getUserSkillAction'}
     methods: [GET]
