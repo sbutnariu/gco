@@ -1,5 +1,5 @@
 <?php
-namespace GcoBundle\ExceptionTransformer;
+namespace GcoBundle\Listener;
 
 use GcoBundle\ExceptionTransformer\HttpExceptionTransformer;
 use Symfony\Component\DependencyInjection\ContainerAware;
@@ -28,7 +28,7 @@ class ExceptionTransformerListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::EXCEPTION => array('onKernelException', 255),
+            KernelEvents::EXCEPTION => array('onKernelException', 11)
         );
     }
 
