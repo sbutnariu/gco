@@ -95,4 +95,3 @@ class TechValidator
         return $this->agencyId;
     }
 }
-

@@ -2,17 +2,25 @@
 
 namespace GcoBundle\Service;
 
+use Doctrine\ORM\NoResultException;
+use GcoBundle\DataFixture\UserDataFixture;
 
 class UserService
 {
-    
-    public function __construct()
+    private $dataFixture;
+
+    public function __construct(UserDataFixture $dataFixture)
     {
-        
+        $this->dataFixture = $dataFixture;
     }
 
     public function getUser($id)
     {
-        return new Response($id, 200);
+        $user = $this->dataFixture->getUser($id);
+        if(!empty($user))
+            return $user;
+        else{
+            throw new NoResultException('No user with id '.$id.' found');
+        }
     }
 }

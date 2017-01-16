@@ -3,9 +3,9 @@
 namespace GcoBundle\Entity;
 
 /**
- * Level
+ * Status
  */
-class Level
+class Status
 {
     /**
      * @var integer
@@ -15,7 +15,7 @@ class Level
     /**
      * @var string
      */
-    private $name;
+    private $status;
 
 
     /**
@@ -29,26 +29,26 @@ class Level
     }
 
     /**
-     * Set name
+     * Set status
      *
-     * @param string $name
+     * @param string $status
      *
-     * @return Level
+     * @return Status
      */
-    public function setName($name)
+    public function setStatus($status)
     {
-        $this->name = $name;
+        $this->status = $status;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get status
      *
      * @return string
      */
-    public function getName()
+    public function getStatus()
     {
-        return $this->name;
+        return $this->status;
     }
 }
