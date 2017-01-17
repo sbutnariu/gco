@@ -3,7 +3,6 @@
 namespace GcoBundle\DataFixture;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use GcoBundle\Exceptions\InvalidParametersException;
 use GcoBundle\Exceptions\NotFoundException;
 

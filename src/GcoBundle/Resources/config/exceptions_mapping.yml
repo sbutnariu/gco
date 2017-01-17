@@ -21,3 +21,5 @@ parameters :
             ##Look at src/ExceptionTransformer/HttpExceptionTransformer.php::transform ($throw new $newException($exception->getMessage(), $exception);)
     gco_exception_mapping.exception_map:
             Doctrine\ORM\NoResultException: NotFoundHttpException
+            GcoBundle\Exceptions\InvalidParametersException: BadRequestHttpException
+            GcoBundle\Exceptions\NotFoundException: NotFoundHttpException

@@ -27,16 +27,19 @@ services:
         class: GcoBundle\Listener\MessageExceptionListener
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+            
     gco.exception_transformer.http_exception_transformer:
         class: GcoBundle\ExceptionTransformer\HttpExceptionTransformer
         arguments : [ '%gco_exception_mapping.shortcuts%' ]
         calls :
             - [ "addMap" , [ '%gco_exception_mapping.exception_map%' ] ]
+            
     gco.exception_transformer.http_exception_listener:
         class: GcoBundle\Listener\ExceptionTransformerListener
         arguments: [ "@gco.exception_transformer.http_exception_transformer" ]
         tags:
             - { name: kernel.event_subscriber }
+            
     gco.exception_transformer.rendering_listener:
         class: GcoBundle\Listener\MessageExceptionListener
         tags:

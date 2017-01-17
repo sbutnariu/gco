@@ -38,17 +38,17 @@ class UserSkillControllerTest extends \PHPUnit_Framework_TestCase
     public function exceptionProvider()
     {
         return array(
-            'IsNotNumericException' => array('GcoBundle\Exceptions\InvalidParametersException', 'WRONG_DATA_TYPE', 'p', 'Symfony\Component\HttpKernel\Exception\BadRequestHttpException'),
-            'NotFoundHttpException' => array('GcoBundle\Exceptions\NotFoundException', 'NO_DATA_FOUND', 0, 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException')
+            'IsNotNumericException' => array('GcoBundle\Exceptions\InvalidParametersException', 'WRONG_DATA_TYPE', 'p'),
+            'NotFoundHttpException' => array('GcoBundle\Exceptions\NotFoundException', 'NO_DATA_FOUND', 0)
         );
     }
-    
+   
     /**
      * @dataProvider exceptionProvider
      */
-    public function testGetUserSkillKo($e, $statusCode, $id, $ctrlException)
+    public function testGetUserSkillKo($e, $statusCode, $id)
     {
-        $this->setExpectedException($ctrlException);
+        $this->setExpectedException($e);
         
         $serviceMock = $this->getMockBuilder('GcoBundle\Service\userSkillService')
                 ->disableOriginalConstructor()
@@ -56,7 +56,7 @@ class UserSkillControllerTest extends \PHPUnit_Framework_TestCase
         
         $serviceMock->expects($this->once())
                 ->method('getUserSkill')
-                ->will($this->throwException(New $e($statusCode,'test')));
+                ->will($this->throwException(New $e($statusCode, 'test')));
         
         $normalizerMock = $this->getMockBuilder('GcoBundle\Serializer\UserSkillSerializer')
                 ->getMock();

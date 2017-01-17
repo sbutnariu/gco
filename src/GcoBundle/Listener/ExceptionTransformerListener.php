@@ -2,7 +2,6 @@
 namespace GcoBundle\Listener;
 
 use GcoBundle\ExceptionTransformer\HttpExceptionTransformer;
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -15,7 +14,6 @@ class ExceptionTransformerListener implements EventSubscriberInterface
      * @var HttpExceptionTransformer
      */
     private $exceptionTransformer;
-
 
     public function __construct(HttpExceptionTransformer $exceptionTransformer)
     {
